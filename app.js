@@ -18,16 +18,12 @@
   ];
   const $ = (id) => document.getElementById(id);
   const defaultState = () => ({
-    version: 1, nickname: "Leśny Odkrywca", score: 0, worldQuality: "auto",
+    version: 1, nickname: "Leśny Odkrywca", score: 0,
     correct: 0, wrong: 0, unlocked: 1, completed: {},
     mistakes: {}, records: {}, history: [], lowMotion: false
   });
   let data = loadData();
   let game = null;
-  let currentView = "home";
-  let world = null;
-  let worldPromise = null;
-  let selectedZone = 0;
   let toastTimeout = null;
   let savingWarningShown = false;
 
@@ -58,7 +54,6 @@
     v.wrong = integer(input.wrong,0,1000000);
     v.unlocked = integer(input.unlocked,1,100);
     v.lowMotion = input.lowMotion === true;
-    v.worldQuality = ["auto","eco","standard"].includes(input.worldQuality) ? input.worldQuality : "auto";
     if (input.completed && typeof input.completed === "object" && !Array.isArray(input.completed)) {
       for (const [key, stars] of Object.entries(input.completed).slice(0,100)) {
         const level = Number(key);
@@ -105,7 +100,6 @@
     const button=$("motion-toggle");
     button.setAttribute("aria-pressed",String(data.lowMotion));
     button.textContent = data.lowMotion ? "▶ Włącz animacje" : "◌ Mniej animacji";
-    if(world)world.setReducedMotion(data.lowMotion || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
   }
   function currentZone(level) {return ZONES[Math.floor((level-1)/10)];}
   function titleFor(level) { return level <= 10 ? "Tabliczka mnożenia przez " + level : "Etap " + level + " — " + currentZone(level).name; }
@@ -144,10 +138,8 @@
     return list;
   }
   function nav(view) {
-    const valid=["home","world","map","play","teacher"];
+    const valid=["home","map","play","teacher"];
     if(!valid.includes(view))return;
-    currentView=view;
-    if(view!=="world" && world)world.stop();
     for(const name of valid) {
       const el=$("view-"+name);
       if(el) {el.hidden=name!==view;el.classList.toggle("active",name===view);}
@@ -160,7 +152,6 @@
     if(view==="home") updateHome();
     if(view==="map") drawMap();
     if(view==="teacher") updateTeacher();
-    if(view==="world"){updateWorldPanel();ensureWorld();}
     window.scrollTo({top:0,behavior:data.lowMotion?"instant":"smooth"});
     if(view==="play") setTimeout(()=>$("answer-field").focus({preventScroll:true}),90);
   }
@@ -179,7 +170,7 @@
     const box=$("zones");
     box.replaceChildren();
     ZONES.forEach((zone,i) => {
-      const section=document.createElement("section");section.className="zone";section.id="zone-"+i;
+      const section=document.createElement("section");section.className="zone";
       const heading=document.createElement("div");heading.className="zone-head";
       const icon=document.createElement("span");icon.className="zone-icon";icon.textContent=zone.icon;
       const copy=document.createElement("div");
@@ -404,134 +395,7 @@
     });
   }
 
-  /* Teatr 3D jest opcjonalny: gra, mapy i postępy działają bez WebGL. */
-  function qualityForDevice() {
-    if(data.worldQuality!=="auto")return data.worldQuality;
-    const cores=Number(navigator.hardwareConcurrency||8);
-    const memory=Number(navigator.deviceMemory||8);
-    const handheld=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent||"");
-    return handheld||cores<=4||memory<=4?"eco":"standard";
-  }
-  function reduceWorldMotion() {
-    return data.lowMotion || !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  }
-  function setWorldMessage(message) {
-    $("world-status").textContent=message;
-  }
-  function updateWorldPanel() {
-    const zone=ZONES[selectedZone];
-    if(!zone)return;
-    $("world-zone-number").textContent="KRAINA "+(selectedZone+1)+" Z 10";
-    $("world-zone-icon").textContent=zone.icon;
-    $("world-zone-title").textContent=zone.name;
-    $("world-zone-desc").textContent=zone.desc;
-    const from=selectedZone*10+1,to=from+9;
-    const finished=Object.keys(data.completed).filter(key=>Number(key)>=from&&Number(key)<=to).length;
-    $("world-zone-progress").textContent="Ukończone etapy: "+finished+" / 10";
-    const button=$("world-play");
-    button.disabled=data.unlocked<from;
-    const choice=Math.min(to,Math.max(from,data.unlocked));
-    button.textContent=button.disabled?"🔒 Kraina jeszcze zamknięta":"Graj — etap "+choice+" →";
-    for(const el of $("world-chapters").children){
-      const isSelected=Number(el.dataset.zone)===selectedZone;
-      el.classList.toggle("selected",isSelected);
-      el.setAttribute("aria-pressed",String(isSelected));
-    }
-    $("world-quality").value=data.worldQuality;
-  }
-  function selectWorldZone(index) {
-    selectedZone=Math.max(0,Math.min(9,Math.round(index)));
-    updateWorldPanel();
-    if(world)world.selectZone(selectedZone);
-  }
-  async function ensureWorld() {
-    if(world) {world.start();return;}
-    if(worldPromise)return worldPromise;
-    $("world-placeholder").classList.remove("is-hidden");
-    $("world-retry").hidden=true;
-    $("world-loading-message").textContent="Ożywiamy filcowe postacie i mały, drewniany domek…";
-    setWorldMessage("Trwa uruchamianie przestrzennej scenografii.");
-    worldPromise=(async()=>{
-      try {
-        const module=await import("./world3d.js");
-        const engine=await module.createPuppetWorld($("world-viewport"),{
-          quality:qualityForDevice(),
-          reducedMotion:reduceWorldMotion(),
-          onZoneChange:index=>{if(world){selectedZone=index;updateWorldPanel();}},
-          onSurprise:message=>setWorldMessage(message),
-          onError:error=>{
-            if(world)world.stop();
-            $("world-placeholder").classList.remove("is-hidden");
-            $("world-loading-message").textContent="Scena 3D została zatrzymana. Nadal możesz grać na zwykłej mapie.";
-            $("world-retry").hidden=false;
-            setWorldMessage(error&&error.message?error.message:"Problem z WebGL.");
-          }
-        });
-        world=engine;
-        world.selectZone(selectedZone);
-        $("world-placeholder").classList.add("is-hidden");
-        setWorldMessage("Gotowe! Obróć makietę palcem lub strzałkami. Kliknij postać, aby ją poznać.");
-        if(currentView==="world")world.start();
-      } catch(error) {
-        $("world-placeholder").classList.remove("is-hidden");
-        $("world-loading-message").textContent="Na tym urządzeniu nie udało się włączyć 3D. Gra i wszystkie etapy nadal działają.";
-        $("world-retry").hidden=false;
-        setWorldMessage("Możesz skorzystać z mapy etapów lub spróbować ponownie.");
-        console.warn("Teatr 3D niedostępny:",error);
-      } finally {
-        worldPromise=null;
-      }
-    })();
-    return worldPromise;
-  }
-  function resetWorld() {
-    if(world){world.dispose();world=null;}
-    worldPromise=null;
-    ensureWorld();
-  }
-  function initWorldControls() {
-    const chapters=$("world-chapters");
-    ZONES.forEach((zone,index)=>{
-      const b=document.createElement("button");
-      b.type="button";
-      b.className="world-chapter";
-      b.dataset.zone=String(index);
-      b.title=zone.name;
-      b.setAttribute("aria-label","Kraina "+(index+1)+": "+zone.name);
-      const icon=document.createElement("span");icon.textContent=zone.icon;
-      const number=document.createElement("small");number.textContent=String(index+1);
-      b.append(icon,number);
-      b.addEventListener("click",()=>selectWorldZone(index));
-      chapters.append(b);
-    });
-    $("world-turn-left").addEventListener("click",()=>world?.rotateLeft());
-    $("world-turn-right").addEventListener("click",()=>world?.rotateRight());
-    $("world-reset").addEventListener("click",()=>world?.resetCamera());
-    $("world-retry").addEventListener("click",resetWorld);
-    $("world-play").addEventListener("click",()=>{
-      const from=selectedZone*10+1,to=from+9;
-      if(data.unlocked<from)return;
-      startLevel(Math.min(to,Math.max(from,data.unlocked)));
-    });
-    $("world-show-map").addEventListener("click",()=>{
-      const targetId="zone-"+selectedZone;
-      nav("map");
-      requestAnimationFrame(()=>document.getElementById(targetId)?.scrollIntoView({
-        block:"start",behavior:data.lowMotion?"instant":"smooth"
-      }));
-    });
-    $("world-quality").addEventListener("change",event=>{
-      const next=event.target.value;
-      if(!["auto","eco","standard"].includes(next))return;
-      data.worldQuality=next;saveData();
-      world?.setQuality(qualityForDevice());
-      setWorldMessage(next==="eco"?"Tryb oszczędny: mniej szczegółów i łagodniejsze obciążenie.":"Zmieniono jakość grafiki.");
-    });
-    updateWorldPanel();
-  }
-
   function init() {
-    initWorldControls();
     // Nawigacja i start
     document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",event=>{
       if(b.tagName==="A")event.preventDefault();
