@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 280" role="img" aria-label="Wróbelek Ćwiruś, malowana postać"><defs><filter id="w" x="-7%" y="-7%" width="114%" height="114%"><feTurbulence type="fractalNoise" baseFrequency=".026" numOctaves="2" seed="11" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="grain"><feTurbulence baseFrequency=".24" numOctaves="3" seed="8" type="fractalNoise"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer></filter><linearGradient id="d" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9f7956"/><stop offset="1" stop-color="#604c3a"/></linearGradient><linearGradient id="f" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#dbc69a"/><stop offset="1" stop-color="#b68c5c"/></linearGradient></defs>
+<g filter="url(#w)" stroke="#58483d" stroke-width="3.2" stroke-linejoin="round">
+<path d="M105 174Q66 206 43 235L106 218L120 188Z" fill="#866049"/>
+<path d="M89 168Q48 178 22 151Q41 136 73 144L112 155Z" fill="#79614e"/>
+<path d="M70 158Q71 106 123 97Q181 81 208 134Q229 180 189 216Q147 244 100 218Q69 197 70 158Z" fill="#af825a"/>
+<path d="M110 162Q113 134 160 138Q190 148 197 172Q185 203 151 204Q118 198 110 162Z" fill="#d6b38b" stroke="none"/>
+<path d="M106 116Q139 84 178 112Q180 138 163 145Q130 147 111 128Z" fill="#684f40" stroke="none"/>
+<path d="M201 141L237 157L200 169Z" fill="#b88e52"/>
+<circle cx="183" cy="134" r="5.8" fill="#302c27" stroke="none"/><circle cx="184" cy="133" r="1.7" fill="#fff4d7" stroke="none"/>
+<path d="M144 214L134 256M160 218L160 258" stroke="#896948" stroke-width="4" fill="none"/>
+<path d="M122 257l18-3l14 4m-11-2l21-1l14 2" stroke="#896948" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+<path d="M92 170Q126 179 144 182" stroke="#d5b58d" stroke-width="5" fill="none" opacity=".67"/>
+</g><rect x="30" y="88" width="206" height="173" filter="url(#grain)" opacity=".2"/>
+</svg>
