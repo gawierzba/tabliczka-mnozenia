@@ -13,3 +13,84 @@
 @media(max-width:720px){.class-chooser{align-items:stretch}.class-chooser label{width:100%}.class-chooser .btn{flex:1}}
 
 .exercise-card.finished{min-height:365px}.exercise-card.finished .round-end{inset:0}
+
+
+/* === ETAP II: LEŚNY TEATR LALEK 3D === */
+.hero-actions{display:flex;flex-wrap:wrap;gap:15px;align-items:center}
+.btn-glass{color:#fff8e6;border-color:#fff1d4a8;background:#ffffff16;padding:16px 21px}
+.btn-glass:hover:not(:disabled){background:#ffffff31}
+.teaser-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.teaser{min-width:0}
+.world-layout{display:grid;grid-template-columns:minmax(0,1.64fr) minmax(290px,.9fr);gap:20px;align-items:stretch;margin-bottom:30px}
+.puppet-theater{background:#e5ecde;border:5px solid #fff9e8;border-radius:27px;overflow:hidden;box-shadow:0 15px 38px #204d3e25;min-width:0}
+.world-viewport{height:clamp(390px,49vw,595px);width:100%;overflow:hidden;position:relative;background:radial-gradient(ellipse at 56% 22%,#ecedc0 0,#b8d9d0 55%,#7baf95 100%);isolation:isolate}
+.world-viewport canvas.puppet-canvas{display:block;position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.world-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:20px;background:radial-gradient(ellipse at 50% 70%,#a2cfa0 0,#a6cec1 45%,#b8dcd4 100%);color:#2a5549}
+.world-placeholder.is-hidden{display:none}
+.placeholder-star{font-size:48px;color:#f8e3ac;animation:float 3s ease-in-out infinite}
+.placeholder-hill{display:block;font-size:clamp(32px,6vw,70px);filter:drop-shadow(0 15px 6px #3c685b42);line-height:1.7}
+.world-placeholder p{font-family:Georgia,serif;font-size:18px;max-width:300px;margin:0;line-height:1.5}
+.world-controls{display:flex;align-items:center;gap:9px;padding:13px 18px;background:#f3f1df;border-top:1px solid #e1dfc6}
+.world-control{width:39px;height:39px;display:grid;place-items:center;border:1px solid #cfddcc;border-radius:12px;background:#fffdf0;color:#285d4a;font-size:23px;font-weight:800}
+.world-control:hover{background:#e1eddc}
+.world-control:focus-visible,.world-chapter:focus-visible,.world-settings select:focus-visible{outline:3px solid #efbf77;outline-offset:2px}
+.world-control-caption{color:#627a6b;font-size:12px;margin-left:auto;line-height:1.4}
+.world-status{font-size:13px;color:#496e5d;margin:0;padding:0 18px 13px;min-height:30px;background:#f3f1df;line-height:1.5}
+.world-panel{border:1px solid #e3dfc7;border-radius:26px;background:linear-gradient(180deg,#fffaf0,#f0f1df);padding:25px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+.world-panel-eyebrow{font-size:11px;font-weight:850;letter-spacing:2px;color:#a07943}
+.world-panel-emblem{margin:12px 0;font-size:54px;width:88px;height:88px;border-radius:25px;display:grid;place-items:center;background:#e5eedc;border:1px solid #d4e2ce}
+.world-panel h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(25px,2.4vw,33px);line-height:1.12;letter-spacing:-.8px;margin:6px 0 12px;color:#214e40}
+.world-panel>p{font-size:14px;color:#6b806f;line-height:1.57}
+.world-chapters-label{font-weight:850;letter-spacing:.2px;font-size:12px;color:#50715d;margin:12px 0 10px}
+.world-chapters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.world-chapter{aspect-ratio:1;border:2px solid #d7dfca;border-radius:14px;background:#fbfdf2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:#466853;min-width:0}
+.world-chapter span{font-size:19px;line-height:1.1}
+.world-chapter small{font-size:11px;font-weight:900}
+.world-chapter.selected{background:#fae4b6;border-color:#d2a66b;color:#634a35;box-shadow:0 3px 0 #d6b581}
+.world-chapter:hover{transform:translateY(-2px)}
+.world-zone-progress{margin:13px 0 14px;color:#4c7560!important;font-weight:800;min-height:21px}
+.world-action-buttons{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.world-action-buttons .btn{width:100%;min-height:47px;font-size:13px}
+.world-settings{margin-top:20px;padding-top:15px;border-top:1px dashed #c9d7bf;display:flex;flex-direction:column;gap:9px}
+.world-settings label{font-weight:850;font-size:12px;color:#486a58}
+.world-settings select{width:100%;padding:12px 10px;border:1px solid #ccd6c2;border-radius:11px;background:#fffdf3;color:#335b47;font-weight:700;font-size:12px;min-width:0}
+.world-settings p{font-size:11px;color:#718577;line-height:1.6;margin:0}
+@media(max-width:1150px){
+  .teaser-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .world-layout{grid-template-columns:minmax(0,1.25fr) minmax(280px,1fr)}
+  .world-viewport{height:510px}
+  .world-panel{padding:19px}
+}
+@media(max-width:850px){
+  .world-layout{grid-template-columns:minmax(0,1fr)}
+  .world-viewport{height:min(72vw,570px);min-height:360px}
+  .world-panel{max-width:none}
+  .world-action-buttons{flex-direction:row}
+  .world-action-buttons .btn{flex:1;min-width:0}
+  .world-controls{gap:7px}
+}
+@media(max-width:720px){
+  .teaser-grid{grid-template-columns:1fr}
+  .nav-btn{min-width:0}
+  .nav-btn span{display:inline}
+  .world-layout{gap:12px}
+  .puppet-theater,.world-panel{border-radius:20px}
+  .puppet-theater{border-width:3px}
+  .world-viewport{height:390px;min-height:0}
+  .world-controls{padding:10px;gap:6px;flex-wrap:wrap}
+  .world-control{width:42px;height:42px}
+  .world-control-caption{font-size:10px;flex:1;min-width:135px}
+  .world-status{padding:0 11px 11px}
+  .world-panel{padding:21px}
+  .world-panel h2{font-size:27px}
+  .world-panel-emblem{width:66px;height:66px;font-size:39px}
+  .world-action-buttons{flex-direction:column}
+  .hero-actions{gap:8px}
+  .hero-actions .btn{font-size:12px;padding:12px 14px;min-height:46px}
+}
+@media(max-width:380px){
+  .world-viewport{height:345px}
+  .nav-btn{font-size:10px}
+  .nav-btn span{font-size:9px}
+  .hero-actions .btn{font-size:11px;padding:10px 11px}
+}
