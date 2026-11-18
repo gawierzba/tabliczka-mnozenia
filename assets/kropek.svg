@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 290" role="img" aria-label="Jeżyk Kropek, malowana postać"><defs><filter id="w" x="-7%" y="-7%" width="114%" height="114%"><feTurbulence type="fractalNoise" baseFrequency=".026" numOctaves="2" seed="11" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="grain"><feTurbulence baseFrequency=".24" numOctaves="3" seed="8" type="fractalNoise"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer></filter><linearGradient id="d" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9f7956"/><stop offset="1" stop-color="#604c3a"/></linearGradient><linearGradient id="f" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#dbc69a"/><stop offset="1" stop-color="#b68c5c"/></linearGradient></defs>
+<g filter="url(#w)" stroke="#534232" stroke-linejoin="round" stroke-width="3.5">
+<path d="M39 205L19 179L50 173L25 140L64 148L57 107L89 121L91 85L122 111L139 77L161 111L192 88L205 120L231 113L230 146L256 145L244 172L267 185L235 204Q227 240 185 257Q125 277 74 250Z" fill="#634b38"/>
+<path d="M33 184L59 175L45 151L76 159L72 121L99 138L108 108L128 133L145 100L168 132L191 110L200 141L224 130" stroke="#aa8755" stroke-width="7" fill="none" opacity=".6"/>
+<path d="M66 189Q83 139 156 146Q213 149 237 195Q248 247 173 260Q111 274 74 235Z" fill="url(#f)"/>
+<ellipse cx="202" cy="190" rx="29" ry="20" fill="#e1cfa8" stroke="none"/>
+<circle cx="237" cy="194" r="10" fill="#4d3b31" stroke="none"/>
+<circle cx="165" cy="175" r="6.5" fill="#3a3129" stroke="none"/><circle cx="118" cy="176" r="6.5" fill="#3a3129" stroke="none"/>
+<path d="M167 221q23 11 43-5" stroke="#7c5345" fill="none" stroke-width="2"/>
+<path d="M102 249Q99 269 120 272L139 270L146 249M183 248Q184 269 206 266L213 255" fill="#b18b66"/>
+<ellipse cx="102" cy="196" rx="12" ry="7" fill="#bd866b" opacity=".6" stroke="none"/>
+</g><rect x="20" y="80" width="251" height="195" filter="url(#grain)" opacity=".2"/>
+</svg>
