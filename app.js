@@ -457,7 +457,7 @@
         const engine=await module.createPuppetWorld($("world-viewport"),{
           quality:qualityForDevice(),
           reducedMotion:reduceWorldMotion(),
-          onZoneChange:index=>{selectedZone=index;updateWorldPanel();},
+          onZoneChange:index=>{if(world){selectedZone=index;updateWorldPanel();}},
           onSurprise:message=>setWorldMessage(message),
           onError:error=>{
             if(world)world.stop();
