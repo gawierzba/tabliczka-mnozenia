@@ -1,23 +1,50 @@
 # Leśna Przygoda — Kraina Mnożenia
 
-Autorska, bezpłatna gra edukacyjna do nauki tabliczki mnożenia dla dzieci, rodziców i nauczycieli. Stylistyka: przestrzenna makieta starego filmu lalkowego, z oryginalnymi bohaterami i scenografią.
+Autorska, darmowa gra edukacyjna do tabliczki mnożenia, przeznaczona dla dzieci, ich rodziców i szkoły. Estetyka: scenografia w stylu dawnych filmów lalkowych — bez wykorzystywania bohaterów objętych cudzymi prawami autorskimi.
 
-## Pierwsza wersja
-- 100 etapów: od podstaw mnożenia do wyzwań 100 × 100; poziomy trudności dostosowane do wieku.
-- Ćwiczenia z podpowiedzią, powtórkami trudnych działań, punktami i gwiazdkami.
-- Lekka, animowana scena 2.5D, przełącznik ograniczający animacje, tryb na telefon.
-- Automatyczny zapis lokalny (localStorage), eksport i import postępów w pliku JSON.
-- Raport CSV do przekazania nauczycielowi **wyłącznie za zgodą rodzica**.
-- Osobny tryb klasowy: tabliczka 1–10, ćwiczenie na tablicy, bez nadpisywania postępów dziecka.
-- Żadnych kont, cookies śledzących, reklam ani centralnej bazy danych.
+## Co już działa
 
-## Uruchomienie
-Otwórz `index.html` w przeglądarce lub opublikuj repozytorium przez GitHub Pages (Settings → Pages → Deploy from a branch → main → /(root)).
+- 100 poziomów: od mnożenia przez 1 do ćwiczeń z liczbami do 100 × 100.
+- Osiem działań na poziom, podpowiedzi, trzy gwiazdki, punkty, powtórki trudnych działań.
+- Scena powitalna 2.5D, dostępna na każdym urządzeniu.
+- **Opcjonalny teatr 3D**: proceduralna makieta z trójwymiarowym misiem, zającem, domkiem, lasem, dekoracjami zmieniającymi się wraz z dziesięcioma krainami, obracaniem kamery i dotykaniem bohaterów.
+- Szybkie przejścia z teatru 3D do dziesięciu etapów wybranej krainy.
+- Tryb oszczędzania grafiki, domyślna oszczędna jakość na telefonach, ograniczenie animacji; przy niedostępności WebGL pozostałe funkcje dalej działają.
+- Lokalny, automatyczny zapis postępów przez `localStorage`, import i eksport pliku JSON do przenoszenia na inne urządzenie.
+- Raport CSV z wynikami do przekazania wychowawcy **wyłącznie w uzgodniony, niepubliczny sposób**.
+- Oddzielny tryb klasowy do wspólnego ćwiczenia przy tablicy, bez nadpisywania indywidualnego postępu.
+- Brak kont, reklam, śledzenia, centralnej bazy danych i konieczności podawania imienia/nazwiska.
 
-## Ochrona prywatności
-Gra działa lokalnie w przeglądarce i nie wysyła postępów na serwer. Zalecamy pseudonim zamiast prawdziwego imienia i nazwiska. Plik postępów i raport mogą zawierać pseudonim oraz wyniki — przechowuj je rozsądnie i nie udostępniaj publicznie.
+## Jak udostępnić na GitHub Pages
 
-## Dalszy kierunek
-Docelowo interaktywne, zoptymalizowane sceny 3D, nowe autorskie kukiełkowe postacie, animacje przygód i narzędzia lekcyjne. Wersja startowa używa lekkiej, warstwowej sceny 2.5D zamiast ciężkiego WebGL.
+Repozytorium jest statyczne i nie wymaga żadnego buildu:
 
-© 2026 — autorski projekt edukacyjny. Bez cudzych postaci chronionych prawami autorskimi.
+1. Otwórz **Settings → Pages** repozytorium.
+2. W `Build and deployment` wybierz **Deploy from a branch**.
+3. Wybierz `main` oraz `/(root)` i zapisz.
+4. Gra będzie dostępna pod adresem `https://gawierzba.github.io/tabliczka-mnozenia/` po pomyślnym wdrożeniu Pages.
+
+Wersja 3D ładuje bibliotekę **Three.js 0.187.0** dopiero przy wejściu do teatru, ze stałego adresu CDN jsDelivr. Dlatego do pierwszego otwarcia 3D potrzebny jest dostęp do internetu. Gdy sieć CDN lub WebGL są niedostępne, ćwiczenia oraz dwuwymiarowa mapa nadal działają. Biblioteka Three.js jest udostępniana na licencji MIT: https://github.com/mrdoob/three.js/blob/master/LICENSE .
+
+## Sterowanie
+
+- **Polanka** — rozpoczęcie gry.
+- **Świat 3D** — obracaj makietę przeciągając palcem/myszą, dotykaj postaci, wybieraj krainy 1–10.
+- **Etapy** — dostęp do 100 poziomów; ukończone można odtwarzać ponownie.
+- **Dla dorosłych** — raport CSV, plik postępu, oddzielny tryb klasowy.
+- Przycisk **Mniej animacji** ogranicza ruchy w całej aplikacji. W teatrze 3D można dodatkowo wybrać jakość obrazu.
+
+## Dane i bezpieczeństwo
+
+Postęp pozostaje w pamięci przeglądarki i może zniknąć po usunięciu danych strony lub w trybie prywatnym. Dlatego regularnie pobieraj kopię JSON. Import pliku **zastępuje** postępy na aktualnym urządzeniu (za potwierdzeniem). Nie ma automatycznej synchronizacji między urządzeniami.
+
+Zalecany jest **pseudonim zamiast imienia i nazwiska**. Plik postępu i raport mogą zawierać pseudonim oraz wyniki — nie publikuj ich. Ponieważ projekt nie ma bazy danych, nauczyciel nie widzi automatycznie wyników dzieci.
+
+## Pliki
+
+- `index.html` — semantyka strony i widoki
+- `styles.css` — wygląd i wersja responsywna
+- `app.js` — zadania, postępy, tryb klasowy, raporty
+- `world3d.js` — scena Three.js, wczytywana na żądanie
+
+© 2026 Leśna Przygoda — autorski projekt edukacyjny.
