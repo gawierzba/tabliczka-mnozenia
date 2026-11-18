@@ -145,7 +145,7 @@
       if(el) {el.hidden=name!==view;el.classList.toggle("active",name===view);}
     }
     for(const btn of document.querySelectorAll("[data-nav]")) {
-      const active=btn.dataset.nav===view || (view==="play"&&btn.dataset.nav==="map");
+      const active=btn.dataset.nav===view || (view==="play"&&btn.dataset.nav===(game&&game.classMode?"teacher":"map"));
       btn.classList.toggle("active",active);
       if(active)btn.setAttribute("aria-current","page");else btn.removeAttribute("aria-current");
     }
@@ -193,17 +193,18 @@
       section.append(heading,levels);box.append(section);
     });
   }
-  function startLevel(level) {
-    if(level>data.unlocked || level<1) return;
-    game={level,questions:makeQuestions(level),index:0,roundCorrect:0,roundErrors:0,hints:0,wrongThisQuestion:false,hintedThisQuestion:false,awaitNext:false};
+  function startLevel(level,classMode=false) {
+    if((!classMode && level>data.unlocked) || level<1 || level>100) return;
+    game={level,classMode,questions:makeQuestions(level),index:0,roundCorrect:0,roundErrors:0,hints:0,wrongThisQuestion:false,hintedThisQuestion:false,awaitNext:false};
     $("round-end").hidden=true;
     $("answer-field").hidden=false;
     $("check-answer").hidden=false;
     $("hint-button").hidden=false;
     $("number-keyboard").hidden=false;
-    $("game-zone").textContent=currentZone(level).name.toLocaleUpperCase("pl-PL");
-    $("game-level").textContent="Etap "+level;
-    $("game-score-value").textContent=data.score.toLocaleString("pl-PL");
+    $("game-zone").textContent=classMode?"WSPÓLNA LEKCJA":currentZone(level).name.toLocaleUpperCase("pl-PL");
+    $("game-level").textContent=classMode?"Mnożenie przez "+level:"Etap "+level;
+    $("back-to-map").textContent=classMode?"← Do nauczyciela":"← Wróć do mapy";
+    $("game-score-value").textContent=classMode?"lekcja":data.score.toLocaleString("pl-PL");
     drawQuestion();nav("play");
   }
   function drawQuestion() {
@@ -236,21 +237,26 @@
     const q=game.questions[game.index],key=q.a+"x"+q.b;
     if(Number(raw)===q.a*q.b) {
       const points=game.wrongThisQuestion?5:game.hintedThisQuestion?7:10;
-      data.score+=points;data.correct++;
       game.roundCorrect++;
-      data.mistakes[key]=Math.max(0,(data.mistakes[key]||0)-1);
+      if(!game.classMode){
+        data.score+=points;data.correct++;
+        data.mistakes[key]=Math.max(0,(data.mistakes[key]||0)-1);
+        saveData();
+        $("game-score-value").textContent=data.score.toLocaleString("pl-PL");
+        $("header-points").textContent=data.score.toLocaleString("pl-PL");
+      }
       game.awaitNext=true;
-      saveData();
-      $("game-score-value").textContent=data.score.toLocaleString("pl-PL");
-      $("header-points").textContent=data.score.toLocaleString("pl-PL");
       $("check-answer").textContent=game.index===QUESTIONS_PER_ROUND-1?"Zakończ etap →":"Następne działanie →";
       $("hint-button").disabled=true;
       feedback(["Brawo! Kolejna iskierka w Twojej kolekcji! ✨","Świetnie! Leśni przyjaciele są dumni! 🌿","Wspaniale! Idzie Ci coraz lepiej! ⭐"][rint(0,2)],true);
       if(!data.lowMotion) sparkle(10);
     }else{
-      game.wrongThisQuestion=true;game.roundErrors++;data.wrong++;
-      data.mistakes[key]=integer((data.mistakes[key]||0)+1,0,999);
-      saveData();
+      game.wrongThisQuestion=true;game.roundErrors++;
+      if(!game.classMode){
+        data.wrong++;
+        data.mistakes[key]=integer((data.mistakes[key]||0)+1,0,999);
+        saveData();
+      }
       $("answer-field").value="";
       feedback("Jeszcze nie tym razem. Spróbuj spokojnie raz jeszcze. 🌼",false);
       $("answer-field").focus({preventScroll:true});
@@ -281,22 +287,29 @@
   function finishRound() {
     if(!game)return;
     const level=game.level;
-    const stars=game.roundErrors===0&&game.hints===0?3:game.roundErrors<=2?2:1;
-    data.completed[level]=Math.max(data.completed[level]||0,stars);
-    if(level>=data.unlocked&&level<100)data.unlocked=level+1;
-    if(!data.records[level])data.records[level]={attempts:0,bestCorrect:0,lastDate:""};
-    const r=data.records[level];r.attempts++;r.bestCorrect=Math.max(r.bestCorrect,game.roundCorrect);r.lastDate=new Date().toISOString();
-    data.history.push({level,correct:game.roundCorrect,errors:game.roundErrors,hints:game.hints,date:new Date().toISOString()});
-    data.history=data.history.slice(-100);
-    saveData();
+    let summary="";
+    if(game.classMode){
+      summary="Wspólnie rozwiązaliście "+QUESTIONS_PER_ROUND+" działań. Brawo, klaso! Możecie rozegrać kolejną rundę lub wrócić do panelu nauczyciela.";
+      $("next-round").textContent="Jeszcze jedna runda ↻";
+    }else{
+      const stars=game.roundErrors===0&&game.hints===0?3:game.roundErrors<=2?2:1;
+      data.completed[level]=Math.max(data.completed[level]||0,stars);
+      if(level>=data.unlocked&&level<100)data.unlocked=level+1;
+      if(!data.records[level])data.records[level]={attempts:0,bestCorrect:0,lastDate:""};
+      const r=data.records[level];r.attempts++;r.bestCorrect=Math.max(r.bestCorrect,game.roundCorrect);r.lastDate=new Date().toISOString();
+      data.history.push({level,correct:game.roundCorrect,errors:game.roundErrors,hints:game.hints,date:new Date().toISOString()});
+      data.history=data.history.slice(-100);
+      saveData();
+      summary="Zdobywasz "+stars+" "+(stars===1?"gwiazdkę":"gwiazdki")+"! Ukończono "+QUESTIONS_PER_ROUND+" działań. "+(level<100?"Nowy etap czeka na mapie.":"Wspaniale! Odkryto wszystkie 100 etapów.");
+      $("next-round").textContent=level<100?"Następny etap →":"Zagraj ponownie ↻";
+      updateHome();
+      notify("Etap "+level+" ukończony! "+stars+" ★");
+    }
     $("exercise-bar").style.width="100%";
-    $("round-summary").textContent="Zdobywasz "+stars+" "+(stars===1?"gwiazdkę":"gwiazdki")+"! Ukończono "+QUESTIONS_PER_ROUND+" działań. "+(level<100?"Nowy etap czeka na mapie.":"Wspaniale! Odkryto wszystkie 100 etapów.");
+    $("round-summary").textContent=summary;
     $("round-end").hidden=false;
     $("answer-field").hidden=true;$("check-answer").hidden=true;$("hint-button").hidden=true;$("number-keyboard").hidden=true;
-    $("next-round").textContent=level<100?"Następny etap →":"Zagraj ponownie ↻";
-    updateHome();
     if(!data.lowMotion)sparkle(45);
-    notify("Etap "+level+" ukończony! "+stars+" ★");
   }
   function sparkle(n=22) {
     const layer=$("confetti");layer.replaceChildren();
@@ -388,9 +401,10 @@
     $("start-button").addEventListener("click",()=>startLevel(data.unlocked));
     $("continue-button").addEventListener("click",()=>startLevel(data.unlocked));
     $("quick-play").addEventListener("click",()=>startLevel(data.unlocked));
-    $("back-to-map").addEventListener("click",()=>nav("map"));
-    $("round-map").addEventListener("click",()=>nav("map"));
-    $("next-round").addEventListener("click",()=>startLevel(Math.min(100,game.level+1)));
+    $("back-to-map").addEventListener("click",()=>nav(game&&game.classMode?"teacher":"map"));
+    $("round-map").addEventListener("click",()=>nav(game&&game.classMode?"teacher":"map"));
+    $("next-round").addEventListener("click",()=>startLevel(game.classMode?game.level:Math.min(100,game.level+1),game.classMode));
+    $("class-start").addEventListener("click",()=>startLevel(integer($("class-table").value,1,10),true));
     $("save-name").addEventListener("click",()=>{
       data.nickname=cleanNickname($("player-name").value);saveData();updateHome();notify("Zapisano pseudonim: "+data.nickname);
     });
