@@ -408,7 +408,7 @@ export async function createPuppetWorld(host, options = {}) {
         f.mesh.position.y=f.base+Math.sin(time*.0013+f.phase)*.11;
         f.mesh.scale.setScalar(.65+.35*(1+Math.sin(time*.002+f.phase)));
       }
-      if(bearWavingArm)bearWavingArm.rotation.z=time<waveUntil?.5+Math.sin(time*.014)*.7:.5;
+      if(bearWavingArm)bearWavingArm.rotation.z=time < waveUntil ? (.5 + Math.sin(time*.014)*.7) : .5;
       houseDoor.rotation.y=time<doorOpenUntil?-.46*(.5+.5*Math.sin(time*.006)) : 0;
     }
     updateCamera(time);
