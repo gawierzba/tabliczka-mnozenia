@@ -13,6 +13,7 @@ export async function createPuppetWorld(host, options = {}) {
   const gl = probe.getContext("webgl2", { failIfMajorPerformanceCaveat: true }) ||
              probe.getContext("webgl", { failIfMajorPerformanceCaveat: true });
   if (!gl) throw new Error("Urządzenie nie obsługuje WebGL lub ma wyłączone przyspieszenie.");
+  gl.getExtension("WEBGL_lose_context")?.loseContext();
   const THREE = await import(THREE_URL);
   const palette = [
     { sky:0xb6dbd3,ground:0x90b37a,tree:0x4b8265,flower:0xe9a47f,accent:0xf3c475 },
@@ -52,7 +53,7 @@ export async function createPuppetWorld(host, options = {}) {
   renderer.domElement.className = "puppet-canvas";
   renderer.domElement.setAttribute("aria-label","Obrotowa, przestrzenna makieta leśnego świata. Przeciągnij palcem, aby obrócić widok.");
   renderer.domElement.setAttribute("role","img");
-  renderer.domElement.style.touchAction = "pan-y";
+  renderer.domElement.style.touchAction = "none";
   host.append(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -258,10 +259,10 @@ export async function createPuppetWorld(host, options = {}) {
     [-2.9,-5.6,.8,1],[.4,-5.7,1,0],[5.1,-4.3,.95,0],
     [6.0,-.7,.8,1],[5.5,3.2,.68,1],[-2.0,5.5,.66,0]
   ];
-  for(const [x,z,s,t] of treeSites)tree(forest,x,z,s,t);
+  for(const [x,z,s,t] of treeSites.slice(0,quality==="eco"?6:treeSites.length))tree(forest,x,z,s,t);
   // Grzybki wśród drobnych kwiatów.
   for(const [x,z,s] of [[-3.7,3.5,.62],[-3.9,-3.0,.55],[4.3,2.6,.63],[1.0,-4.8,.4]])mushroom(forest,x,z,s);
-  for(let i=0;i<44;i++) {
+  for(let i=0;i<(quality==="eco"?15:44);i++) {
     const angle=random()*Math.PI*2,r=3.3+random()*3.35;
     const x=Math.cos(angle)*r,z=Math.sin(angle)*r;
     if((x>1.1&&x<4&&z>-3.3&&z<-.5)||(x<-1.0&&x>-3.5&&z>0&&z<2.4))continue;
@@ -270,7 +271,7 @@ export async function createPuppetWorld(host, options = {}) {
   const accents=new THREE.Group();root.add(accents);
   const fireflies=[];
   const glowMaterial=new THREE.MeshBasicMaterial({color:0xffe6ab});
-  for(let i=0;i<14;i++){
+  for(let i=0;i<(quality==="eco"?7:14);i++){
     const a=random()*Math.PI*2,r=2.1+random()*4.7;
     const m=mesh(root,new THREE.SphereGeometry(.035+random()*.035,6,6),glowMaterial,
       Math.cos(a)*r,.8+random()*2.9,Math.sin(a)*r);
@@ -318,7 +319,7 @@ export async function createPuppetWorld(host, options = {}) {
         sphere(accents,materials.accent,x,.6,z,.19,.24,.19,8);
       }
     }else if(currentZone===3) {
-      for(let n=0;n<15;n++){const a=n*Math.PI*2/15;flower(accents,Math.cos(a)*4.45,Math.sin(a)*4.45,materials.accent,1.2);}
+      for(let n=0,nmax=quality==="eco"?7:15;n<nmax;n++){const a=n*Math.PI*2/nmax;flower(accents,Math.cos(a)*4.45,Math.sin(a)*4.45,materials.accent,1.2);}
     }else if(currentZone===4) {
       const group=new THREE.Group();group.position.set(-.3,.27,-2.6);group.rotation.y=.18;accents.add(group);
       for(let i=0;i<7;i++)box(group,materials.wood,.37,.15,1.65,i*.42-1.3,.22,0);
