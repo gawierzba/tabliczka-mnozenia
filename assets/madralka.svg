@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 315" role="img" aria-label="Sówka Mądralka, malowana postać"><defs><filter id="w" x="-7%" y="-7%" width="114%" height="114%"><feTurbulence type="fractalNoise" baseFrequency=".026" numOctaves="2" seed="11" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="grain"><feTurbulence baseFrequency=".24" numOctaves="3" seed="8" type="fractalNoise"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer></filter><linearGradient id="d" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9f7956"/><stop offset="1" stop-color="#604c3a"/></linearGradient><linearGradient id="f" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#dbc69a"/><stop offset="1" stop-color="#b68c5c"/></linearGradient></defs>
+<g filter="url(#w)" stroke="#544536" stroke-linejoin="round" stroke-width="3.4">
+<path d="M74 198Q42 188 29 220Q45 254 88 246" fill="#93765a"/><path d="M188 198Q222 181 237 216Q226 246 183 247" fill="#94765b"/>
+<path d="M88 241Q72 266 79 287L119 288L130 257ZM156 253L150 288L196 289Q198 267 181 245Z" fill="#b18058"/>
+<path d="M54 88L57 32L105 63Q133 51 164 64L212 33L207 96Q233 139 211 215Q191 270 132 272Q71 263 51 216Q30 148 54 88Z" fill="url(#d)"/>
+<path d="M86 138Q109 117 137 132Q165 114 184 137Q208 169 181 211Q163 242 133 239Q99 235 78 205Q64 168 86 138Z" fill="url(#f)"/>
+<path d="M85 99Q102 73 131 105Q156 71 186 97Q206 136 173 154Q142 165 130 142Q98 163 83 143Q70 125 85 99Z" fill="#ebd5a8"/>
+<circle cx="111" cy="117" r="18" fill="#f6ebd0" stroke="#8c6a50" stroke-width="2"/><circle cx="154" cy="118" r="18" fill="#f6ebd0" stroke="#8c6a50" stroke-width="2"/>
+<circle cx="114" cy="117" r="7" fill="#322e29" stroke="none"/><circle cx="153" cy="119" r="7" fill="#322e29" stroke="none"/>
+<path d="M124 147L136 168L146 146Z" fill="#d8a05e" stroke="#966c43"/><path d="M121 183Q132 192 142 183" stroke="#7d5a44" fill="none" stroke-width="2.2"/>
+<path d="M108 223q22 16 50 0" stroke="#bda27b" fill="none" stroke-width="7" opacity=".58"/>
+<path d="M62 169Q88 189 94 220M208 168Q184 191 180 221" stroke="#d1aa7a" stroke-width="8" fill="none" opacity=".46"/>
+<path d="M80 260L99 255M165 252l23 10" stroke="#c79e69" stroke-width="4"/>
+</g>
+<rect x="31" y="30" width="205" height="260" filter="url(#grain)" opacity=".22"/>
+</svg>
