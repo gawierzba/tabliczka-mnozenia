@@ -94,3 +94,6 @@
   .nav-btn span{font-size:9px}
   .hero-actions .btn{font-size:11px;padding:10px 11px}
 }
+
+/* Komunikat awaryjny musi znajdować się nad canvasem po utracie WebGL. */
+.world-placeholder{z-index:2}
