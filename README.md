@@ -8,6 +8,7 @@ Autorska, bezpłatna gra edukacyjna do nauki tabliczki mnożenia dla dzieci, rod
 - Lekka, animowana scena 2.5D, przełącznik ograniczający animacje, tryb na telefon.
 - Automatyczny zapis lokalny (localStorage), eksport i import postępów w pliku JSON.
 - Raport CSV do przekazania nauczycielowi **wyłącznie za zgodą rodzica**.
+- Osobny tryb klasowy: tabliczka 1–10, ćwiczenie na tablicy, bez nadpisywania postępów dziecka.
 - Żadnych kont, cookies śledzących, reklam ani centralnej bazy danych.
 
 ## Uruchomienie
