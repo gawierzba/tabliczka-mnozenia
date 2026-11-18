@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 440" role="img" aria-label="Autorski miś Tuliś, malowany w stylu dawnej dobranocki"><defs>
+<filter id="hand" x="-7%" y="-7%" width="114%" height="114%"><feTurbulence type="fractalNoise" baseFrequency=".021" numOctaves="2" seed="9" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+<filter id="fabric" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".14" numOctaves="3" seed="4" result="n"/><feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer></filter>
+<radialGradient id="fur"><stop stop-color="#ba8858"/><stop offset="1" stop-color="#86512f"/></radialGradient>
+<radialGradient id="cream"><stop stop-color="#fff0c5"/><stop offset="1" stop-color="#dfc093"/></radialGradient>
+<linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bd5c41"/><stop offset=".7" stop-color="#a5442e"/><stop offset="1" stop-color="#853a2a"/></linearGradient>
+<radialGradient id="body"><stop stop-color="#f5e8c7"/><stop offset="1" stop-color="#c9bc9e"/></radialGradient>
+<linearGradient id="scarf" x1="0" y1="0" x2="1" y2=".6"><stop stop-color="#66849b"/><stop offset="1" stop-color="#405e7e"/></linearGradient>
+<pattern id="stitch" width="14" height="11" patternUnits="userSpaceOnUse"><path d="M2 10l4-3" stroke="#f4d0a3" stroke-width=".85" opacity=".52" fill="none"/></pattern>
+<pattern id="speck" width="19" height="21" patternUnits="userSpaceOnUse"><circle cx="3" cy="7" r="1.1" fill="#f4d39c" opacity=".27"/><path d="M11 18l2-1" stroke="#4c332d" opacity=".17"/></pattern>
+</defs>
+<g filter="url(#hand)" stroke="#5a3d2a" stroke-opacity=".72" stroke-width="4.2" stroke-linejoin="round">
+  <path d="M122 292Q84 280 72 335Q68 365 96 377Q119 377 133 351L151 315Z" fill="#8c552f"/>
+  <path d="M214 291Q241 266 264 300Q283 331 259 360Q232 375 217 348L193 310Z" fill="#986039"/>
+  <path d="M119 332Q95 335 94 385Q90 414 121 418Q153 419 159 385L159 346Z" fill="#7d4b2c"/>
+  <path d="M187 343Q191 380 190 393Q193 423 230 417Q257 407 246 382Q239 351 220 337Z" fill="#7d4c2f"/>
+  <path d="M91 220Q93 184 140 178L206 176Q250 188 256 230Q266 297 234 363Q204 397 146 380Q80 366 86 287Z" fill="url(#fur)"/>
+  <path d="M116 269Q144 251 190 263Q214 289 209 351Q189 364 154 355Q126 345 116 309Z" fill="url(#cream)" opacity=".6" stroke="none"/>
+  <path d="M92 236Q77 222 63 232Q37 246 48 284Q62 312 95 290L111 263Z" fill="#996039"/>
+  <path d="M236 231Q254 215 271 228Q298 245 284 280Q269 302 245 293L228 271Z" fill="#9a603c"/>
+  <path d="M116 282Q146 272 173 278Q201 266 229 279L236 351Q204 393 139 365Q113 347 116 282Z" fill="url(#shirt)"/>
+  <path d="M115 205Q130 196 143 205L151 272L133 284L114 231Z" fill="url(#shirt)"/>
+  <path d="M197 209Q210 194 226 205L228 278L211 283Z" fill="url(#shirt)"/>
+  <path d="M131 281Q149 268 168 269Q190 269 211 281" fill="none" stroke="#d8865e" stroke-width="3" stroke-dasharray="5 6"/>
+  <path d="M152 318Q174 323 197 315" fill="none" stroke="#ce7450" stroke-width="3"/>
+  <circle cx="138" cy="272" r="10" fill="#ead5a7" stroke="#7a523e" stroke-width="2.8"/>
+  <circle cx="211" cy="273" r="10" fill="#ead5a7" stroke="#7a523e" stroke-width="2.8"/>
+  <path d="M137 268v8m-4-4h8M211 269v8m-4-4h8" stroke="#9e7853" stroke-width="2"/>
+  <path d="M104 78Q74 42 61 82Q54 114 89 130L121 111Z" fill="#945a34"/>
+  <path d="M230 80Q258 37 278 77Q283 111 248 126L213 106Z" fill="#945a34"/>
+  <path d="M93 86Q78 72 79 95Q87 110 101 108Z" fill="#c38b63" stroke="none"/>
+  <path d="M246 88Q260 65 260 92Q257 109 241 107Z" fill="#c38b63" stroke="none"/>
+  <path d="M72 161Q71 107 131 84Q180 67 228 89Q287 112 267 178Q253 225 182 234Q103 233 76 188Z" fill="url(#fur)"/>
+  <path d="M109 177Q130 144 171 157Q210 141 233 173Q245 200 211 212Q163 226 123 203Q105 192 109 177Z" fill="url(#cream)" stroke="none"/>
+  <path d="M145 174Q171 168 187 171Q198 176 189 186Q173 203 156 192Q147 188 145 174Z" fill="#3e3029" stroke="#3d2b24" stroke-width="2"/>
+  <path d="M169 194Q164 208 148 205M169 194Q176 207 191 201" stroke="#624438" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <ellipse cx="123" cy="155" rx="7" ry="8.7" fill="#2b2724" stroke="none"/>
+  <ellipse cx="220" cy="153" rx="7" ry="8.7" fill="#2b2724" stroke="none"/>
+  <circle cx="125" cy="151" r="2.1" fill="#f7e8c4" stroke="none"/><circle cx="222" cy="149" r="2.1" fill="#f7e8c4" stroke="none"/>
+  <ellipse cx="104" cy="183" rx="14" ry="7" fill="#b97864" opacity=".48" stroke="none"/>
+  <ellipse cx="242" cy="181" rx="14" ry="7" fill="#b97864" opacity=".48" stroke="none"/>
+</g>
+<path d="M75 120Q98 98 107 98M231 96Q248 100 262 124" stroke="#efcf9f" stroke-opacity=".17" stroke-width="8" fill="none"/>
+<path d="M110 260l5 74m109-73l-4 74" stroke="#e8a16c" stroke-opacity=".28" stroke-width="3" stroke-dasharray="3 8"/>
+<path d="M84 116Q75 147 81 175" stroke="#a7764e" stroke-width="5" opacity=".3" fill="none"/>
+<rect x="42" y="50" width="260" height="374" fill="url(#speck)" opacity=".38" style="mix-blend-mode:multiply"/>
+<rect x="41" y="48" width="263" height="373" filter="url(#fabric)" opacity=".2"/>
+</svg>
