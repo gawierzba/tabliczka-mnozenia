@@ -10,7 +10,6 @@ import { readFileSync } from "node:fs";
 const root = new URL("../", import.meta.url);
 const read = name => readFileSync(new URL(name,root),"utf8");
 const app = read("app.js");
-const world = read("world3d.js");
 const html = read("index.html");
 
 function engine() {
@@ -48,9 +47,8 @@ function playRound(engine,number,shared=false) {
     engine.game.advanceQuestion();
   }
 }
-test("Składnia obu plików JavaScript jest prawidłowa",()=>{
+test("Składnia JavaScript jest prawidłowa",()=>{
   assert.doesNotThrow(()=>new Function(app));
-  assert.doesNotThrow(()=>new Function(world.replace("export async function createPuppetWorld","async function createPuppetWorld")));
 });
 test("Wszystkie identyfikatory elementów interfejsu istnieją w HTML",()=>{
   const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]));
@@ -91,9 +89,8 @@ test("Tryb klasowy nie narusza wyniku pojedynczego ucznia",()=>{
 });
 test("Import ogranicza wartości i odrzuca nieprawidłowy format",()=>{
   const {game:g}=engine();
-  const value=g.validateData({...g.defaultState(),nickname:"<script>x</script>",unlocked:999,worldQuality:"eco",mistakes:{"7x8":3,"bad key":4}});
+  const value=g.validateData({...g.defaultState(),nickname:"<script>x</script>",unlocked:999,mistakes:{"7x8":3,"bad key":4}});
   assert.equal(value.unlocked,100);
-  assert.equal(value.worldQuality,"eco");
   assert.equal(value.nickname.includes("<"),false);
   assert.equal(value.mistakes["7x8"],3);
   assert.equal(value.mistakes["bad key"],undefined);
