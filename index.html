@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#123f3e">
+  <meta name="description" content="Leśna Przygoda — bezpłatna gra do nauki tabliczki mnożenia. 100 etapów, własna bajkowa kraina, zapis postępów bez konta.">
+  <title>Leśna Przygoda | Kraina Mnożenia</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Przejdź do treści</a>
+  <div class="sky-grain" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#home" data-nav="home" aria-label="Leśna Przygoda, strona główna">
+        <span class="brand-symbol" aria-hidden="true">✿</span>
+        <span><strong>Leśna Przygoda</strong><small>KRAINA MNOŻENIA</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Menu gry">
+        <button class="nav-btn active" data-nav="home" aria-current="page">🏡 <span>Polanka</span></button>
+        <button class="nav-btn" data-nav="map">🗺️ <span>Mapa etapów</span></button>
+        <button class="nav-btn" data-nav="teacher">📚 <span>Dla dorosłych</span></button>
+      </nav>
+      <div class="header-points" title="Zebrane iskierki"><span aria-hidden="true">✦</span><strong id="header-points">0</strong></div>
+    </header>
+
+    <main id="main">
+      <section id="view-home" class="view active" aria-labelledby="welcome-title">
+        <div class="hero">
+          <div class="landscape" id="landscape" aria-hidden="true">
+            <svg class="landscape-svg" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice" role="presentation">
+              <defs>
+                <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#9ad6cf"/><stop offset=".62" stop-color="#dddfaa"/><stop offset="1" stop-color="#f0c78d"/></linearGradient>
+                <radialGradient id="sun"><stop stop-color="#fff7ca" stop-opacity="1"/><stop offset="1" stop-color="#fff4a2" stop-opacity="0"/></radialGradient>
+                <linearGradient id="hill" x1="0" x2=".6" y1="0" y2="1"><stop stop-color="#7eae7d"/><stop offset="1" stop-color="#396b5c"/></linearGradient>
+                <linearGradient id="ground" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#b7bc7a"/><stop offset="1" stop-color="#6a8b58"/></linearGradient>
+                <linearGradient id="roof" x1="0" x2="1" y1="0" y2=".9"><stop stop-color="#d98466"/><stop offset="1" stop-color="#a75151"/></linearGradient>
+                <linearGradient id="bearBody" x1="0" x2="1" y1="0" y2=".7"><stop stop-color="#c99c6a"/><stop offset=".6" stop-color="#a8724c"/><stop offset="1" stop-color="#865a3d"/></linearGradient>
+                <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+                <filter id="shad"><feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#184842" flood-opacity=".27"/></filter>
+                <pattern id="wood" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M6 0V30M22 0V30" stroke="#794c39" stroke-opacity=".18" stroke-width="2"/></pattern>
+                <pattern id="speckle" width="35" height="33" patternUnits="userSpaceOnUse"><circle cx="3" cy="9" r="1.3" fill="#ffefc0" opacity=".23"/><circle cx="24" cy="18" r="1.1" fill="#113c36" opacity=".18"/></pattern>
+              </defs>
+              <rect width="1200" height="620" fill="url(#sky)"/>
+              <circle cx="908" cy="138" r="210" fill="url(#sun)"/><circle cx="908" cy="138" r="61" fill="#fff1b2" opacity=".9"/>
+              <g class="distant-clouds" opacity=".7" fill="#faf5d8"><ellipse cx="195" cy="122" rx="88" ry="24"/><ellipse cx="259" cy="110" rx="57" ry="30"/><ellipse cx="1000" cy="220" rx="99" ry="23"/><ellipse cx="1060" cy="203" rx="49" ry="26"/></g>
+              <path d="M0 365Q150 256 290 322T574 292T840 305T1200 252V620H0Z" fill="#83afa0"/>
+              <path d="M0 420Q170 300 341 380T630 337T899 379T1200 320V620H0Z" fill="url(#hill)"/>
+              <g class="far-trees" opacity=".7" fill="#315c55">
+                <path d="M31 395l28-90 28 90zM95 395l22-70 22 70zM202 368l33-103 33 103zM275 370l25-78 25 78zM650 382l33-113 33 113zM734 373l27-89 27 89zM992 368l35-102 35 102zM1071 375l26-80 26 80z"/>
+              </g>
+              <path d="M0 451Q210 379 416 420T840 396T1200 401V620H0Z" fill="url(#ground)"/>
+              <path d="M0 500Q270 455 500 490T980 467T1200 481V620H0Z" fill="#8da874"/>
+              <path d="M530 620Q564 500 688 452Q756 432 815 401" fill="none" stroke="#c9ae85" stroke-width="58" opacity=".78"/>
+              <path d="M530 620Q564 500 688 452Q756 432 815 401" fill="none" stroke="#f6d7a1" stroke-width="36" opacity=".64"/>
+              <g class="big-tree" filter="url(#shad)" transform="translate(1060 390)">
+                <path d="M-13 20Q-9-45-18-105L-7-118L17-101Q3-36 15 23Z" fill="#75513d"/>
+                <circle cx="-41" cy="-122" r="75" fill="#47755e"/><circle cx="35" cy="-142" r="70" fill="#608769"/><circle cx="7" cy="-195" r="67" fill="#678b71"/><circle cx="-16" cy="-143" r="80" fill="#5f8c6e"/>
+                <g fill="#a8b98a" opacity=".35"><circle cx="-37" cy="-164" r="22"/><circle cx="44" cy="-178" r="16"/><circle cx="-4" cy="-208" r="14"/></g>
+              </g>
+              <g filter="url(#shad)" transform="translate(755 343)">
+                <path d="M-99 32V-42Q-100-85-58-104H62Q98-74 98-42V32Z" fill="#dfbc8e" stroke="#b68e65" stroke-width="4"/>
+                <path d="M-123-41Q-68-130 0-139Q72-137 121-41Q43-56 0-58Q-75-56-123-41Z" fill="url(#roof)" stroke="#954e43" stroke-width="6"/>
+                <path d="M-15 33V-16Q-15-39 10-40Q33-37 33-15V33Z" fill="#7b5140"/><circle cx="24" cy="-1" r="3" fill="#eed6a5"/>
+                <rect x="-74" y="-26" width="39" height="36" rx="9" fill="#f9d491" stroke="#8e7057" stroke-width="5"/><path d="M-54-26V10M-74-8h39" stroke="#8e7057" stroke-width="4"/>
+                <rect x="-97" y="-39" width="191" height="70" fill="url(#wood)" opacity=".6"/>
+                <path d="M-12-139V-174H10V-138" fill="#906f59"/><path d="M-16-169H14" stroke="#f1d9b4" stroke-width="6"/>
+              </g>
+              <g class="mushroom left-mushroom" transform="translate(134 463)" filter="url(#shad)">
+                <path d="M-15 17Q-25-38-11-74H26Q38-27 23 17Z" fill="#f2dcab"/><path d="M-90-60Q-63-150 5-148Q72-146 93-60Q0-27-90-60Z" fill="#bd674f"/><g fill="#edc9ad"><circle cx="-32" cy="-102" r="13"/><circle cx="15" cy="-126" r="19"/><circle cx="52" cy="-89" r="10"/></g>
+              </g>
+              <g class="tiny-flowers" fill="#ffe5b0">
+                <circle cx="299" cy="493" r="5"/><circle cx="323" cy="519" r="4"/><circle cx="963" cy="492" r="5"/><circle cx="1010" cy="538" r="4"/><circle cx="427" cy="565" r="5"/><circle cx="1155" cy="520" r="5"/>
+              </g>
+              <g class="puppet" filter="url(#shad)" transform="translate(445 441)">
+                <ellipse cx="0" cy="105" rx="72" ry="18" fill="#295342" opacity=".25"/>
+                <ellipse cx="-50" cy="72" rx="24" ry="34" fill="url(#bearBody)" transform="rotate(19 -50 72)"/>
+                <ellipse cx="48" cy="72" rx="24" ry="34" fill="url(#bearBody)" transform="rotate(-19 48 72)"/>
+                <ellipse cx="0" cy="24" rx="65" ry="77" fill="url(#bearBody)"/><ellipse cx="2" cy="35" rx="37" ry="48" fill="#e4c69b"/>
+                <g class="puppet-arm"><ellipse cx="-62" cy="-3" rx="23" ry="46" transform="rotate(30 -62 -3)" fill="#ae7e56"/><ellipse cx="64" cy="0" rx="23" ry="46" transform="rotate(-23 64 0)" fill="#ae7e56"/></g>
+                <circle cx="-48" cy="-107" r="30" fill="#b88960"/><circle cx="48" cy="-107" r="30" fill="#b88960"/><circle cx="-48" cy="-107" r="16" fill="#d5ab87"/><circle cx="48" cy="-107" r="16" fill="#d5ab87"/>
+                <ellipse cx="0" cy="-76" rx="77" ry="71" fill="url(#bearBody)"/>
+                <ellipse cx="0" cy="-49" rx="44" ry="35" fill="#eed1a6"/>
+                <ellipse cx="0" cy="-64" rx="15" ry="11" fill="#443a34"/><path d="M-11-47Q0-36 11-47" fill="none" stroke="#493c33" stroke-width="4" stroke-linecap="round"/>
+                <ellipse cx="-29" cy="-88" rx="6" ry="8" fill="#332e2a"/><ellipse cx="29" cy="-88" rx="6" ry="8" fill="#332e2a"/>
+                <circle cx="-51" cy="-61" r="12" fill="#d88b7c" opacity=".45"/><circle cx="51" cy="-61" r="12" fill="#d88b7c" opacity=".45"/>
+                <path d="M-48-9Q0 17 48-9L42 9Q-8 32-46 8Z" fill="#477b77"/><path d="M28 14L40 74L54 61L46 9Z" fill="#376762"/>
+              </g>
+              <g class="front-foliage"><path d="M0 555Q80 533 151 554T330 553T600 570T918 555T1200 543V620H0Z" fill="#547a57" opacity=".55"/><path d="M0 593Q140 567 295 587T630 584T925 591T1200 571V620H0Z" fill="#416a51" opacity=".6"/></g>
+              <g class="light-dots" fill="#fff1b0"><circle cx="367" cy="327" r="5"/><circle cx="618" cy="271" r="4"/><circle cx="897" cy="380" r="6"/><circle cx="272" cy="402" r="5"/><circle cx="1126" cy="349" r="4"/></g>
+              <rect width="1200" height="620" fill="url(#speckle)" opacity=".7"/>
+            </svg>
+            <div class="floating-letter letter-a">×</div>
+            <div class="floating-letter letter-b">✦</div>
+            <div class="floating-letter letter-c">7</div>
+          </div>
+          <div class="hero-shade"></div>
+          <div class="hero-copy">
+            <span class="eyebrow">✦ WITAJ W BAJKOWYM LESIE ✦</span>
+            <h1 id="welcome-title">Małe kroki.<br><em>Wielkie odkrycia.</em></h1>
+            <p>Zaprzyjaźnij się z liczbami. Odkrywaj zakątki zaczarowanego lasu i zostań mistrzem mnożenia!</p>
+            <button class="btn btn-primary btn-hero" id="start-button">Rozpocznij przygodę <span aria-hidden="true">➜</span></button>
+          </div>
+          <div class="hero-corner">✿ BAJKA, W KTÓREJ LICZBY OŻYWAJĄ</div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="panel player-panel">
+            <div class="panel-heading"><span class="panel-mark">✧</span><h2>Twoja przygoda</h2></div>
+            <label for="player-name">Twój bajkowy pseudonim <span class="muted">(bez nazwiska)</span></label>
+            <div class="name-row"><input id="player-name" type="text" maxlength="24" autocomplete="off" placeholder="np. Leśny Odkrywca"><button id="save-name" class="btn btn-small btn-outline">Zapisz</button></div>
+            <div class="stat-trio">
+              <div><strong id="stat-level">1</strong><small>Etap</small></div>
+              <div><strong id="stat-stars">0</strong><small>Gwiazdki</small></div>
+              <div><strong id="stat-accuracy">—</strong><small>Skuteczność</small></div>
+            </div>
+          </div>
+          <div class="panel next-panel">
+            <div class="panel-heading"><span class="panel-mark">✦</span><h2>Następny przystanek</h2></div>
+            <p class="next-name" id="next-level-name">Polanka pierwszych kroków</p>
+            <p class="muted" id="next-level-desc">Zaczniemy spokojnie — od mnożenia przez 1.</p>
+            <div class="mini-track"><div class="mini-track-inner" id="home-track"></div></div>
+            <button id="continue-button" class="btn btn-dark">Zagraj teraz <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="panel toolkit-panel">
+            <div class="panel-heading"><span class="panel-mark">❀</span><h2>Twój plecak</h2></div>
+            <p>Postępy zapisują się na tym urządzeniu. Możesz je przenieść na inny komputer lub telefon.</p>
+            <div class="toolkit-buttons">
+              <button class="btn btn-outline" id="export-progress">↓ Zapisz przygodę</button>
+              <button class="btn btn-outline" id="import-progress">↑ Wczytaj przygodę</button>
+            </div>
+          </div>
+        </div>
+        <div class="section-label"><span>✿</span> ODKRYWAJ SWÓJ LAS <span>✿</span></div>
+        <div class="teaser-grid">
+          <button class="teaser" data-nav="map"><span class="teaser-emoji">🍄</span><strong>100 etapów</strong><small>Od pierwszej polanki aż po krainę setek</small><span class="teaser-arrow">Odkryj mapę ↗</span></button>
+          <button class="teaser" id="quick-play"><span class="teaser-emoji">🐾</span><strong>Ćwicz bez pośpiechu</strong><small>Podpowiedzi, spokojne powtórki i kolejne gwiazdki</small><span class="teaser-arrow">Zacznij ćwiczyć ↗</span></button>
+          <button class="teaser" data-nav="teacher"><span class="teaser-emoji">📖</span><strong>Dla rodziców i szkoły</strong><small>Przygotuj raport lub przenieś zapis gry</small><span class="teaser-arrow">Zobacz więcej ↗</span></button>
+        </div>
+      </section>
+
+      <section id="view-map" class="view" aria-labelledby="map-title" hidden>
+        <div class="page-heading"><span class="eyebrow dark">MAPA PRZYGODY</span><h1 id="map-title">Sto kroków przez zaczarowany las</h1><p>Otwieraj kolejne etapy. Najpierw nauczymy się małej tabliczki, a później wyruszymy znacznie dalej.</p></div>
+        <div class="map-legend"><span>✦ ukończony etap</span><span>● dostępny</span><span>🔒 jeszcze zamknięty</span></div>
+        <div id="zones" class="zone-list"></div>
+      </section>
+
+      <section id="view-play" class="view" aria-labelledby="question-heading" hidden>
+        <div class="game-top"><button class="btn btn-outline btn-small" id="back-to-map">← Wróć do mapy</button><div class="game-top-title"><span id="game-zone">LEŚNA POLANKA</span><strong id="game-level">Etap 1</strong></div><div class="game-score">✦ <span id="game-score-value">0</span></div></div>
+        <div class="game-stage">
+          <div class="game-stage-decor" aria-hidden="true"><span class="stage-tree">🌳</span><span class="stage-friend">🧸</span><span class="stage-mushroom">🍄</span><span class="stage-flower">✿</span></div>
+          <div class="exercise-card">
+            <div class="exercise-progress"><span id="exercise-count">Zadanie 1 z 8</span><div class="progress-track"><div id="exercise-bar"></div></div></div>
+            <p class="exercise-prompt" id="exercise-prompt">Policz i wpisz wynik</p>
+            <h2 id="question-heading" class="expression"><span id="factor-a">2</span> <span>×</span> <span id="factor-b">3</span> <span>=</span> <span class="answer-mark">?</span></h2>
+            <label for="answer-field" class="sr-only">Wpisz wynik mnożenia</label>
+            <input id="answer-field" class="answer-field" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" autocomplete="off" placeholder="Twój wynik" aria-describedby="feedback">
+            <p id="feedback" class="feedback" aria-live="polite">Możesz liczyć na palcach, kartce albo w pamięci.</p>
+            <div id="hint-box" class="hint-box" hidden></div>
+            <div class="game-actions"><button id="check-answer" class="btn btn-primary">Sprawdź ✓</button><button id="hint-button" class="btn btn-outline">💡 Podpowiedź</button></div>
+            <div class="keyboard" id="number-keyboard" aria-label="Klawiatura cyfr"></div>
+            <div id="round-end" class="round-end" hidden>
+              <div class="round-cup">🏆</div>
+              <h2>Wspaniała wyprawa!</h2>
+              <p id="round-summary"></p>
+              <div class="round-actions"><button id="next-round" class="btn btn-primary">Dalej przez las →</button><button id="round-map" class="btn btn-outline">Mapa etapów</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-teacher" class="view" aria-labelledby="adult-title" hidden>
+        <div class="page-heading"><span class="eyebrow dark">DLA RODZICÓW I NAUCZYCIELI</span><h1 id="adult-title">Nauka, którą można obserwować</h1><p>Bez kont i bez bazy danych. Wyniki pozostają na urządzeniu dziecka — można pobrać raport, aby przekazać go wychowawcy.</p></div>
+        <div class="teacher-grid">
+          <div class="panel"><div class="panel-heading"><span class="panel-mark">✦</span><h2>Podsumowanie</h2></div><div id="teacher-stats" class="report-stats"></div><h3>Najczęściej mylone działania</h3><div id="weak-questions" class="weak-list"></div></div>
+          <div class="panel"><div class="panel-heading"><span class="panel-mark">✧</span><h2>Zapis i raport</h2></div><p>Możesz pobrać plik postępów, aby wczytać grę na innym urządzeniu. Raport CSV można otworzyć w arkuszu kalkulacyjnym.</p><div class="teacher-buttons"><button id="export-teacher" class="btn btn-dark">↓ Pobierz zapis gry</button><button id="import-teacher" class="btn btn-outline">↑ Wczytaj zapis gry</button><button id="report-button" class="btn btn-outline">▤ Pobierz raport CSV</button></div><div class="privacy-note"><strong>Ważne:</strong> raport i zapis zawierają pseudonim oraz wyniki dziecka. Nie udostępniaj ich publicznie. Bez bazy danych nauczyciel nie widzi automatycznie wyników całej klasy.</div></div>
+        </div>
+        <div class="panel teacher-class"><div class="panel-heading"><span class="panel-mark">❀</span><h2>Pomysł na wspólną lekcję</h2></div><p>Otwórz grę na tablicy interaktywnej, wybierz etap i poproś klasę o wspólne rozwiązanie działań. Każde dziecko może później ćwiczyć samodzielnie we własnym tempie.</p></div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>✿ Leśna Przygoda · Kraina Mnożenia</span><span>Autorski projekt edukacyjny · bez reklam i kont</span><button id="motion-toggle" aria-pressed="false" title="Ogranicz animacje">◌ Mniej animacji</button></footer>
+  </div>
+
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+</body>
+</html>
