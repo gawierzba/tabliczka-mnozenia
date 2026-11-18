@@ -197,6 +197,7 @@
     if((!classMode && level>data.unlocked) || level<1 || level>100) return;
     game={level,classMode,questions:makeQuestions(level),index:0,roundCorrect:0,roundErrors:0,hints:0,wrongThisQuestion:false,hintedThisQuestion:false,awaitNext:false};
     $("round-end").hidden=true;
+    document.querySelector(".exercise-card").classList.remove("finished");
     $("answer-field").hidden=false;
     $("check-answer").hidden=false;
     $("hint-button").hidden=false;
@@ -308,6 +309,7 @@
     $("exercise-bar").style.width="100%";
     $("round-summary").textContent=summary;
     $("round-end").hidden=false;
+    document.querySelector(".exercise-card").classList.add("finished");
     $("answer-field").hidden=true;$("check-answer").hidden=true;$("hint-button").hidden=true;$("number-keyboard").hidden=true;
     if(!data.lowMotion)sparkle(45);
   }
