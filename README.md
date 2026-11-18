@@ -34,6 +34,10 @@ Wersja 3D ładuje bibliotekę **Three.js 0.187.0** dopiero przy wejściu do teat
 - **Dla dorosłych** — raport CSV, plik postępu, oddzielny tryb klasowy.
 - Przycisk **Mniej animacji** ogranicza ruchy w całej aplikacji. W teatrze 3D można dodatkowo wybrać jakość obrazu.
 
+## Testy logiki
+
+Uruchom lokalnie z katalogu repozytorium: `node --test tests/smoke.mjs`. Zestaw obejmuje 100 etapów, losowanie działań, tryb klasowy, zapisy i zgodność elementów interfejsu.
+
 ## Dane i bezpieczeństwo
 
 Postęp pozostaje w pamięci przeglądarki i może zniknąć po usunięciu danych strony lub w trybie prywatnym. Dlatego regularnie pobieraj kopię JSON. Import pliku **zastępuje** postępy na aktualnym urządzeniu (za potwierdzeniem). Nie ma automatycznej synchronizacji między urządzeniami.
