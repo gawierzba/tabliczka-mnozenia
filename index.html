@@ -20,7 +20,8 @@
       </a>
       <nav class="main-nav" aria-label="Menu gry">
         <button class="nav-btn active" data-nav="home" aria-current="page">🏡 <span>Polanka</span></button>
-        <button class="nav-btn" data-nav="map">🗺️ <span>Mapa etapów</span></button>
+        <button class="nav-btn" data-nav="world">🌲 <span>Świat 3D</span></button>
+        <button class="nav-btn" data-nav="map">🗺️ <span>Etapy</span></button>
         <button class="nav-btn" data-nav="teacher">📚 <span>Dla dorosłych</span></button>
       </nav>
       <div class="header-points" title="Zebrane iskierki"><span aria-hidden="true">✦</span><strong id="header-points">0</strong></div>
@@ -101,7 +102,7 @@
             <span class="eyebrow">✦ WITAJ W BAJKOWYM LESIE ✦</span>
             <h1 id="welcome-title">Małe kroki.<br><em>Wielkie odkrycia.</em></h1>
             <p>Zaprzyjaźnij się z liczbami. Odkrywaj zakątki zaczarowanego lasu i zostań mistrzem mnożenia!</p>
-            <button class="btn btn-primary btn-hero" id="start-button">Rozpocznij przygodę <span aria-hidden="true">➜</span></button>
+            <div class="hero-actions"><button class="btn btn-primary btn-hero" id="start-button">Rozpocznij przygodę <span aria-hidden="true">➜</span></button><button class="btn btn-glass" data-nav="world">Zobacz świat 3D ✧</button></div>
           </div>
           <div class="hero-corner">✿ BAJKA, W KTÓREJ LICZBY OŻYWAJĄ</div>
         </div>
@@ -135,9 +136,60 @@
         </div>
         <div class="section-label"><span>✿</span> ODKRYWAJ SWÓJ LAS <span>✿</span></div>
         <div class="teaser-grid">
+          <button class="teaser" data-nav="world"><span class="teaser-emoji">🎭</span><strong>Ożywiony teatr 3D</strong><small>Obracaj bajkową makietę, poznaj misia i odkrywaj krainy</small><span class="teaser-arrow">Wejdź do teatru ↗</span></button>
           <button class="teaser" data-nav="map"><span class="teaser-emoji">🍄</span><strong>100 etapów</strong><small>Od pierwszej polanki aż po krainę setek</small><span class="teaser-arrow">Odkryj mapę ↗</span></button>
           <button class="teaser" id="quick-play"><span class="teaser-emoji">🐾</span><strong>Ćwicz bez pośpiechu</strong><small>Podpowiedzi, spokojne powtórki i kolejne gwiazdki</small><span class="teaser-arrow">Zacznij ćwiczyć ↗</span></button>
           <button class="teaser" data-nav="teacher"><span class="teaser-emoji">📖</span><strong>Dla rodziców i szkoły</strong><small>Przygotuj raport lub przenieś zapis gry</small><span class="teaser-arrow">Zobacz więcej ↗</span></button>
+        </div>
+      </section>
+
+
+      <section id="view-world" class="view" aria-labelledby="world-title" hidden>
+        <div class="page-heading">
+          <span class="eyebrow dark">AKT II · TEATR LALEK 3D</span>
+          <h1 id="world-title">Wejdź do zaczarowanego lasu</h1>
+          <p>To nie jest obrazek — oglądasz prawdziwą trójwymiarową makietę. Obracaj ją palcem, poznawaj bohaterów i odkrywaj kolejne krainy mnożenia.</p>
+        </div>
+        <div class="world-layout">
+          <div class="puppet-theater">
+            <div id="world-viewport" class="world-viewport" aria-label="Interaktywny widok bajkowej makiety w 3D">
+              <div class="world-placeholder" id="world-placeholder">
+                <span class="placeholder-star">✧</span>
+                <span class="placeholder-hill">🌲 🏡 🧸 🍄 🌳</span>
+                <p id="world-loading-message">Zaglądamy za kulisy bajkowego teatru…</p>
+                <button id="world-retry" class="btn btn-primary btn-small" hidden>Spróbuj ponownie</button>
+              </div>
+            </div>
+            <div class="world-controls" role="group" aria-label="Sterowanie kamerą">
+              <button class="world-control" id="world-turn-left" aria-label="Obróć w lewo" title="Obróć w lewo">↶</button>
+              <button class="world-control" id="world-reset" aria-label="Ustaw kamerę na początek" title="Widok początkowy">⌂</button>
+              <button class="world-control" id="world-turn-right" aria-label="Obróć w prawo" title="Obróć w prawo">↷</button>
+              <span class="world-control-caption">Przesuń palcem, aby obrócić · dotknij misia lub domku</span>
+            </div>
+            <p id="world-status" class="world-status" role="status" aria-live="polite">Witaj w teatrze matematycznych przygód.</p>
+          </div>
+          <aside class="world-panel" aria-labelledby="world-zone-title">
+            <span class="world-panel-eyebrow" id="world-zone-number">KRAINA 1 Z 10</span>
+            <div class="world-panel-emblem" id="world-zone-icon" aria-hidden="true">🌱</div>
+            <h2 id="world-zone-title">Polanka pierwszych kroków</h2>
+            <p id="world-zone-desc">Właśnie tutaj zaczyna się matematyczna przygoda.</p>
+            <div class="world-chapters-label">Wybierz krainę</div>
+            <div class="world-chapters" id="world-chapters" role="group" aria-label="Dziesięć krain leśnej przygody"></div>
+            <p id="world-zone-progress" class="world-zone-progress" aria-live="polite"></p>
+            <div class="world-action-buttons">
+              <button id="world-play" class="btn btn-primary">Zagraj w tej krainie →</button>
+              <button id="world-show-map" class="btn btn-outline">Zobacz jej 10 etapów</button>
+            </div>
+            <div class="world-settings">
+              <label for="world-quality">Jakość grafiki</label>
+              <select id="world-quality">
+                <option value="auto">Automatyczna (zalecana)</option>
+                <option value="eco">Oszczędna · starszy telefon</option>
+                <option value="standard">Pełna · mocne urządzenie</option>
+              </select>
+              <p>Scena 3D jest uruchamiana tylko po wejściu do teatru. Jeśli urządzenie jej nie obsłuży, wszystkie zadania pozostają dostępne na mapie.</p>
+            </div>
+          </aside>
         </div>
       </section>
 
