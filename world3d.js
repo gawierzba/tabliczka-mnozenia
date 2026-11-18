@@ -39,6 +39,10 @@ export async function createPuppetWorld(host, options = {}) {
   let altitude = 0.55;
   let distance = 19;
   let angularVelocity = 0;
+  let revealStarted = -1;
+  let waveUntil = 0;
+  let doorOpenUntil = 0;
+  let bearWavingArm = null;
   let drag = null;
   const cleanup = [];
 
@@ -200,7 +204,7 @@ export async function createPuppetWorld(host, options = {}) {
   box(house,materials.plaster,2.65,2.08,2.18,0,1.07,0);
   const roof=mesh(house,new THREE.ConeGeometry(2.20,1.47,4),materials.roof,0,2.79,0);
   roof.rotation.y=Math.PI/4;
-  box(house,materials.darkwood,.69,1.38,.07,.12,.69,1.13);
+  const houseDoor=box(house,materials.darkwood,.69,1.38,.07,.12,.69,1.13);
   sphere(house,materials.gold,.4,.76,1.2,.06);
   for(const x of [-.84,.9]){
     box(house,materials.darkwood,.66,.65,.10,x,1.44,1.14);
@@ -222,6 +226,7 @@ export async function createPuppetWorld(host, options = {}) {
     sphere(bear,materials.bear,x,.30,.20,.29,.26,.4);
     const arm=sphere(bear,materials.bearDark,x*1.4,1.06,0,.23,.45,.28);
     arm.rotation.z=x<0?-.5:.5;
+    if(x>0)bearWavingArm=arm;
     sphere(bear,materials.bear,x*1.08,2.18,.04,.26,.28,.20);
     sphere(bear,materials.rose,x*1.08,2.20,.20,.13,.15,.045);
     sphere(bear,materials.black,x*.63,1.87,.51,.062,.075,.075,10);
@@ -298,7 +303,9 @@ export async function createPuppetWorld(host, options = {}) {
     return obj;
   }
   function selectZone(index) {
-    currentZone=Math.max(0,Math.min(9,Math.round(index)));
+    const nextZone=Math.max(0,Math.min(9,Math.round(index)));
+    if(currentZone!==nextZone && active && !reducedMotion){revealStarted=performance.now();angularVelocity=.18;}
+    currentZone=nextZone;
     const p=palette[currentZone];
     scene.background.setHex(p.sky);
     scene.fog.color.setHex(p.sky);
@@ -355,11 +362,15 @@ export async function createPuppetWorld(host, options = {}) {
     if(typeof options.onZoneChange==="function")options.onZoneChange(currentZone);
   }
 
-  function updateCamera() {
+  function updateCamera(time=performance.now()) {
     const h=Math.max(.3,Math.min(1.25,altitude));
-    const z=Math.max(11,Math.min(29,distance));
+    // Filmowe otwarcie: powolny lot kamery do ręcznie wykonanej makiety.
+    const portion=reducedMotion||revealStarted<0?0:Math.max(0,1-(time-revealStarted)/2500);
+    const ease=portion*portion*(3-2*portion);
+    const z=Math.max(11,Math.min(29,distance))+8*ease;
     const hor=Math.cos(h)*z;
-    camera.position.set(Math.sin(azimuth)*hor,Math.sin(h)*z+target.y,Math.cos(azimuth)*hor);
+    const orbit=azimuth-.31*ease;
+    camera.position.set(Math.sin(orbit)*hor,Math.sin(h)*z+target.y+1.2*ease,Math.cos(orbit)*hor);
     camera.lookAt(target);
   }
   function resize() {
@@ -395,14 +406,18 @@ export async function createPuppetWorld(host, options = {}) {
       for(const item of animated)item.object.position.y=item.baseY+Math.sin(time*.0017+item.phase)*.038;
       for(const f of fireflies){
         f.mesh.position.y=f.base+Math.sin(time*.0013+f.phase)*.11;
+        f.mesh.scale.setScalar(.65+.35*(1+Math.sin(time*.002+f.phase)));
       }
+      if(bearWavingArm)bearWavingArm.rotation.z=time<waveUntil?.5+Math.sin(time*.014)*.7:.5;
+      houseDoor.rotation.y=time<doorOpenUntil?-.46*(.5+.5*Math.sin(time*.006)) : 0;
     }
-    updateCamera();
+    updateCamera(time);
     render(time);
   }
   function start() {
     if(disposed||active)return;
     active=true;lastTime=performance.now();lastFrame=0;
+    if(revealStarted<0)revealStarted=lastTime;
     resize();
     raf=requestAnimationFrame(frame);
   }
@@ -416,7 +431,9 @@ export async function createPuppetWorld(host, options = {}) {
     if(reducedMotion) {
       angularVelocity=0;
       animated.forEach(item=>item.object.position.y=item.baseY);
-      fireflies.forEach(f=>f.mesh.position.y=f.base);
+      fireflies.forEach(f=>{f.mesh.position.y=f.base;f.mesh.scale.setScalar(1);});
+      if(bearWavingArm)bearWavingArm.rotation.z=.5;
+      houseDoor.rotation.y=0;
     }
     render(performance.now());
   }
@@ -457,6 +474,8 @@ export async function createPuppetWorld(host, options = {}) {
       if(found.length) {
         let obj=found[0].object;
         while(obj && !obj.userData.message)obj=obj.parent;
+        if(obj===bear)waveUntil=performance.now()+2200;
+        if(obj===house)doorOpenUntil=performance.now()+2100;
         if(obj && typeof options.onSurprise==="function") options.onSurprise(obj.userData.message);
       }
     }
