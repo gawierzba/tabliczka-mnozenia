@@ -11,3 +11,5 @@
 .class-chooser select{padding:11px 14px;min-width:70px;border-radius:12px;border:2px solid #b8cbb9;background:#fffdf3;color:#245446;font-size:16px;font-weight:800}
 .class-chooser .btn{padding:11px 17px}
 @media(max-width:720px){.class-chooser{align-items:stretch}.class-chooser label{width:100%}.class-chooser .btn{flex:1}}
+
+.exercise-card.finished{min-height:365px}.exercise-card.finished .round-end{inset:0}
