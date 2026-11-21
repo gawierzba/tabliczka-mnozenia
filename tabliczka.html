@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#eee1bf">
+  <meta name="description" content="Pełna interaktywna tabliczka mnożenia: 1–10, 1–20 oraz wszystkie wyniki od 1 × 1 do 100 × 100. Nauka, sprawdzanie i drukowanie w stylu starej dobranocki.">
+  <title>Wielka Tabliczka Mnożenia | Leśna Przygoda</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./vintage.css">
+  <link rel="stylesheet" href="./tabliczka.css">
+  <script src="./tabliczka.js" defer></script>
+</head>
+<body class="multiplication-page">
+  <a class="skip-link" href="#table-section">Przejdź do tabliczki</a>
+  <div class="sky-grain" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="Powrót do Leśnej Przygody">
+        <span class="brand-symbol" aria-hidden="true">✿</span>
+        <span><strong>Leśna Przygoda</strong><small>KRAINA MNOŻENIA</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Nawigacja">
+        <a class="nav-btn nav-link" href="./index.html">🏡 <span>Polanka</span></a>
+        <a class="nav-btn nav-link nav-active" href="./tabliczka.html" aria-current="page">✕ <span>Tabliczka</span></a>
+      </nav>
+      <div class="header-points" title="Zajrzyj do bajkowej księgi"><span aria-hidden="true">✦</span><strong>1–100</strong></div>
+    </header>
+
+    <main>
+      <section class="mt-hero" aria-labelledby="mt-title">
+        <div class="mt-hero-landscape" aria-hidden="true"><img src="./assets/forest-paint.svg" alt=""></div>
+        <div class="mt-hero-paper">
+          <div class="mt-kicker">✿ LEŚNA KSIĘGA WIEDZY ✿</div>
+          <h1 id="mt-title">Wielka tabliczka<br><em>mnożenia</em></h1>
+          <p>Otwórz księgę, wybierz liczby i odkryj, jak powstają wyniki. Możesz podglądać, ćwiczyć i sprawdzać się we własnym tempie.</p>
+          <a href="#table-section" class="btn btn-primary mt-start">Otwórz tabliczkę ↓</a>
+        </div>
+        <img class="mt-hero-owl" src="./assets/madralka.svg" alt="Sówka Mądralka czuwa nad leśną księgą">
+      </section>
+
+      <section id="table-section" class="mt-book" aria-labelledby="mt-book-title">
+        <div class="mt-book-heading">
+          <div>
+            <span class="mt-kicker">ROZDZIAŁ I · WIELKA PLANSZA</span>
+            <h2 id="mt-book-title">Spójrz, odkryj, zapamiętaj</h2>
+            <p>Dotknij dowolnej kratki. Pokażemy Ci działanie, wynik i małą wskazówkę.</p>
+          </div>
+          <img class="mt-book-bear" src="./assets/tulis.svg" alt="Miś Tuliś">
+        </div>
+
+        <div class="mt-controls">
+          <fieldset class="mt-modes">
+            <legend>Jaki zakres oglądamy?</legend>
+            <div class="mt-segments">
+              <button type="button" class="mt-mode is-active" data-mode="10" aria-pressed="true">1–10 <span>na początek</span></button>
+              <button type="button" class="mt-mode" data-mode="20" aria-pressed="false">1–20 <span>dla odkrywców</span></button>
+              <button type="button" class="mt-mode" data-mode="100" aria-pressed="false">1–100 <span>wielka księga</span></button>
+            </div>
+          </fieldset>
+
+          <div class="mt-switch-row">
+            <label class="mt-reveal-toggle" for="mt-hide-results">
+              <input type="checkbox" id="mt-hide-results">
+              <span class="mt-switch" aria-hidden="true"></span>
+              <span>Zakryj wyniki — sprawdzę się!</span>
+            </label>
+            <button type="button" class="btn btn-outline mt-print" id="mt-print">▤ Drukuj tabliczkę</button>
+          </div>
+
+          <div id="mt-large-controls" class="mt-large-controls" hidden>
+            <div class="mt-large-head"><span>Wielka tabliczka 100 × 100</span><small>Wybierz dziesięć wierszy i dziesięć kolumn. Każda para liczb od 1 do 100 jest dostępna.</small></div>
+            <div class="mt-block-row">
+              <label for="mt-row-block">Wiersze</label>
+              <select id="mt-row-block" aria-label="Zakres wierszy"></select>
+              <label for="mt-col-block">Kolumny</label>
+              <select id="mt-col-block" aria-label="Zakres kolumn"></select>
+            </div>
+            <div class="mt-step-buttons">
+              <button type="button" class="btn btn-outline btn-small" id="mt-prev-row">← Poprzednie wiersze</button>
+              <button type="button" class="btn btn-outline btn-small" id="mt-next-row">Następne wiersze →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-board-head">
+          <div>
+            <span class="mt-board-label">✿ WYNIKI MNOŻENIA ✿</span>
+            <h3 id="mt-range-label">Tabliczka od 1 do 10</h3>
+          </div>
+          <p id="mt-board-hint">Pierwsza liczba jest po lewej, druga u góry. W miejscu ich przecięcia znajduje się wynik.</p>
+        </div>
+        <div class="mt-table-frame" tabindex="0" aria-label="Przewijana tabliczka mnożenia">
+          <table id="mt-table" class="mt-table" aria-label="Tabliczka mnożenia od 1 do 10">
+            <caption class="sr-only">Pełna tabliczka mnożenia od 1 do 10. Wybierz kratkę, aby poznać działanie.</caption>
+            <thead id="mt-thead"></thead>
+            <tbody id="mt-tbody"></tbody>
+          </table>
+        </div>
+        <p class="mt-table-help" id="mt-table-help">Na telefonie przesuń tabliczkę w bok, aby zobaczyć wszystkie kolumny.</p>
+
+        <div class="mt-discovery" aria-live="polite">
+          <div class="mt-discovery-copy">
+            <span class="mt-kicker">✦ ODKRYCIE DNIA ✦</span>
+            <p class="mt-equation" id="mt-equation">3 × 4 = 12</p>
+            <p class="mt-explanation" id="mt-explanation">Trzy grupy po cztery elementy dają razem dwanaście.</p>
+            <div id="mt-dots" class="mt-dot-groups" aria-label="Trzy grupy po cztery kropki"></div>
+            <button type="button" class="btn btn-primary mt-show-answer" id="mt-show-answer" hidden>Pokaż wynik ✦</button>
+          </div>
+          <img src="./assets/hopik.svg" alt="" class="mt-discovery-rabbit" aria-hidden="true">
+        </div>
+      </section>
+
+      <section class="mt-learn-more" aria-labelledby="mt-extra-title">
+        <div class="mt-extras-intro">
+          <span class="mt-kicker">ROZDZIAŁ II · LICZBOWE SZTUCZKI</span>
+          <h2 id="mt-extra-title">Wielkie liczby? Też damy radę!</h2>
+          <p>Sprawdź dowolne mnożenie, a sówka pokaże Ci jego miejsce w tabliczce.</p>
+        </div>
+        <form id="mt-lookup-form" class="mt-lookup-form">
+          <label for="mt-number-a">Pierwsza liczba</label>
+          <input type="number" id="mt-number-a" min="1" max="100" value="7" required inputmode="numeric">
+          <span class="mt-times" aria-hidden="true">×</span>
+          <label for="mt-number-b">Druga liczba</label>
+          <input type="number" id="mt-number-b" min="1" max="100" value="8" required inputmode="numeric">
+          <button type="submit" class="btn btn-dark">Odszukaj działanie →</button>
+        </form>
+        <p class="mt-lookup-feedback" id="mt-lookup-feedback" role="status" aria-live="polite">Wpisz dwie liczby od 1 do 100.</p>
+        <div class="mt-extra-actions">
+          <button type="button" id="mt-download-csv" class="btn btn-outline">↓ Pobierz całą tabliczkę 1–100 (CSV)</button>
+          <a class="btn btn-primary" href="./index.html">Wróć do gry →</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>✿ Leśna Przygoda · Leśna księga mnożenia</span>
+      <span>Autorskie ilustracje · bez reklam i logowania</span>
+      <a href="./index.html">Powrót na polankę ↑</a>
+    </footer>
+  </div>
+</body>
+</html>
