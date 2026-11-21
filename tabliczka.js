@@ -33,7 +33,7 @@
   function exampleExplanation(a,b) {
     if (a===1) return "Jeden raz "+b+" to po prostu "+b+".";
     if (b===1) return a+" razy jeden to po prostu "+a+".";
-    if (a<=10 && b<=10) return a+" grup po "+b+" elementów daje razem "+(a*b)+".";
+    if (a<=10 && b<=10) return "Pomyśl o "+a+" grupach, w każdej po "+b+" przedmioty. To razem "+(a*b)+".";
     const small=Math.min(a,b),large=Math.max(a,b);
     const tens=Math.floor(large/10)*10;
     const rest=large-tens;
