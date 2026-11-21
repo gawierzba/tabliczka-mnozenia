@@ -15,6 +15,22 @@ Autorska, darmowa gra edukacyjna do tabliczki mnożenia, przeznaczona dla dzieci
 - Oddzielny tryb klasowy do wspólnego ćwiczenia przy tablicy, bez nadpisywania indywidualnego postępu.
 - Brak kont, reklam, śledzenia, centralnej bazy danych i konieczności podawania imienia/nazwiska.
 
+## Wielka Leśna Księga Mnożenia
+
+Dodatkowa strona `tabliczka.html`, dostępna z menu, polanki i panelu nauczyciela:
+
+- **Pełna tabliczka 1–10:** wszystkie 100 wyników na jednej planszy.
+- **Rozszerzenie 1–20:** wszystkie 400 wyników, na telefonie przewijane poziomo.
+- **Pełna tabliczka 1–100:** wszystkie 10 000 kombinacji dostępne poprzez 100 kart 10 × 10 (wybór zakresu wierszy i kolumn, bez jednoczesnego tworzenia 10 000 elementów DOM).
+- Wybieranie pól, wyróżnianie rzędu i kolumny, podpowiedzi oraz obrazkowe grupy kropek dla podstawowego mnożenia.
+- Tryb **zakryj wyniki** (dziecko może je samodzielnie odkrywać), wyszukiwanie dowolnego działania 1–100 × 1–100.
+- Druk bieżącego zakresu na A4 w orientacji poziomej, również jeśli wyniki są aktualnie zakryte.
+- Pobranie **całej** tabliczki 100 × 100 jako jednego pliku CSV zgodnego z arkuszami kalkulacyjnymi.
+- Wspólna oprawa malowanej dobranocki (własne SVG, postarzana faktura papieru, drewniane ramki), bez bibliotek zewnętrznych.
+- Księga nie odczytuje ani nie zmienia postępów dziecka; gra i zapisy nadal działają niezależnie.
+
+Bezpośredni adres: `https://gawierzba.github.io/tabliczka-mnozenia/tabliczka.html` po aktywacji GitHub Pages.
+
 ## Jak udostępnić na GitHub Pages
 
 Repozytorium jest statyczne i nie wymaga żadnego buildu:
@@ -35,7 +51,7 @@ Gra nie korzysta z WebGL ani Three.js. Wszystkie ćwiczenia działają bez dodat
 
 ## Testy logiki
 
-Uruchom lokalnie z katalogu repozytorium: `node --test tests/smoke.mjs`. Zestaw obejmuje 100 etapów, losowanie działań, tryb klasowy, zapisy i zgodność elementów interfejsu.
+Uruchom lokalnie z katalogu repozytorium: `node --test tests/*.mjs`. Zestaw obejmuje 100 etapów, losowanie działań, tryb klasowy, zapisy i zgodność elementów interfejsu.
 
 ## Dane i bezpieczeństwo
 
@@ -49,6 +65,7 @@ Zalecany jest **pseudonim zamiast imienia i nazwiska**. Plik postępu i raport m
 - `styles.css` — fundament układu responsywnego
 - `vintage.css` — autorska stylistyka dawnej dobranocki: papier, farba, drewno i interfejs
 - `app.js` — zadania, postępy, tryb klasowy, raporty
+- `tabliczka.html`, `tabliczka.css`, `tabliczka.js` — odrębna księga pełnej tabliczki mnożenia 1–100
 - `assets/` — 7 autorskich ilustracji SVG (pejzaż, faktura papieru i pięciu bohaterów)
 
 © 2026 Leśna Przygoda — autorski projekt edukacyjny.
