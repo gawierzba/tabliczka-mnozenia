@@ -79,6 +79,7 @@
         const selected=rv===a && cv===b;
         cell.classList.toggle("mt-col-highlight",cv===b);
         cell.classList.toggle("mt-selected",selected);
+        cell.classList.toggle("mt-revealed",selected && state.selectedRevealed);
         const btn=cell.querySelector("button");
         if(btn){
           btn.setAttribute("aria-pressed",String(selected));
