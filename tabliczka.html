@@ -118,11 +118,13 @@
           <p>Sprawdź dowolne mnożenie, a sówka pokaże Ci jego miejsce w tabliczce.</p>
         </div>
         <form id="mt-lookup-form" class="mt-lookup-form">
-          <label for="mt-number-a">Pierwsza liczba</label>
-          <input type="number" id="mt-number-a" min="1" max="100" value="7" required inputmode="numeric">
+          <label for="mt-number-a">Pierwsza liczba
+            <input type="number" id="mt-number-a" min="1" max="100" step="1" value="7" required inputmode="numeric">
+          </label>
           <span class="mt-times" aria-hidden="true">×</span>
-          <label for="mt-number-b">Druga liczba</label>
-          <input type="number" id="mt-number-b" min="1" max="100" value="8" required inputmode="numeric">
+          <label for="mt-number-b">Druga liczba
+            <input type="number" id="mt-number-b" min="1" max="100" step="1" value="8" required inputmode="numeric">
+          </label>
           <button type="submit" class="btn btn-dark">Odszukaj działanie →</button>
         </form>
         <p class="mt-lookup-feedback" id="mt-lookup-feedback" role="status" aria-live="polite">Wpisz dwie liczby od 1 do 100.</p>
