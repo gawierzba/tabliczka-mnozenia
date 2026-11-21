@@ -22,6 +22,7 @@
       <nav class="main-nav" aria-label="Menu gry">
         <button class="nav-btn active" data-nav="home" aria-current="page">🏡 <span>Polanka</span></button>
         <button class="nav-btn" data-nav="map">🗺️ <span>Etapy</span></button>
+        <a class="nav-btn nav-link" href="./tabliczka.html">✕ <span>Tabliczka</span></a>
         <button class="nav-btn" data-nav="teacher">📚 <span>Dla dorosłych</span></button>
       </nav>
       <div class="header-points" title="Zebrane iskierki"><span aria-hidden="true">✦</span><strong id="header-points">0</strong></div>
@@ -45,6 +46,19 @@
           </div>
           <div class="hero-corner">✿ NASZA WŁASNA MALOWANA DOBRANOCKA</div>
         </div>
+
+        <section class="mt-home-invite" aria-labelledby="mt-home-invite-title">
+          <div class="mt-home-invite-pattern" aria-hidden="true">
+            <span>2 × 3 = 6</span><span>4 × 5 = 20</span><span>7 × 8 = 56</span>
+          </div>
+          <div class="mt-home-invite-copy">
+            <span>✿ WIELKA LEŚNA KSIĘGA ✿</span>
+            <h2 id="mt-home-invite-title">Cała tabliczka mnożenia<br>zawsze pod ręką</h2>
+            <p>Od pierwszych działań 1–10 aż do wszystkich wyników 100 × 100. Odkrywaj odpowiedzi, zakrywaj je i ćwicz pamięć.</p>
+            <a href="./tabliczka.html" class="btn btn-primary">Otwórz tabliczkę mnożenia →</a>
+          </div>
+          <img src="./assets/madralka.svg" alt="Sówka Mądralka" loading="lazy">
+        </section>
 
         <div class="dashboard-grid">
           <div class="panel player-panel">
@@ -137,7 +151,7 @@
           <div class="panel"><div class="panel-heading"><span class="panel-mark">✦</span><h2>Podsumowanie</h2></div><div id="teacher-stats" class="report-stats"></div><h3>Najczęściej mylone działania</h3><div id="weak-questions" class="weak-list"></div></div>
           <div class="panel"><div class="panel-heading"><span class="panel-mark">✧</span><h2>Zapis i raport</h2></div><p>Możesz pobrać plik postępów, aby wczytać grę na innym urządzeniu. Raport CSV można otworzyć w arkuszu kalkulacyjnym.</p><div class="teacher-buttons"><button id="export-teacher" class="btn btn-dark">↓ Pobierz zapis gry</button><button id="import-teacher" class="btn btn-outline">↑ Wczytaj zapis gry</button><button id="report-button" class="btn btn-outline">▤ Pobierz raport CSV</button></div><div class="privacy-note"><strong>Ważne:</strong> raport i zapis zawierają pseudonim oraz wyniki dziecka. Nie udostępniaj ich publicznie. Bez bazy danych nauczyciel nie widzi automatycznie wyników całej klasy.</div></div>
         </div>
-        <div class="panel teacher-class"><div class="panel-heading"><span class="panel-mark">❀</span><h2>Wspólna lekcja na tablicy</h2></div><p>Wybierz tabliczkę i uruchom osiem działań do wspólnego rozwiązania z klasą. Ten tryb nie zmienia indywidualnych postępów ucznia.</p><div class="class-chooser"><label for="class-table">Ćwiczymy mnożenie przez</label><select id="class-table" aria-label="Wybierz tabliczkę mnożenia"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select><button id="class-start" class="btn btn-primary">Rozpocznij lekcję →</button></div></div>
+        <div class="panel teacher-class"><div class="panel-heading"><span class="panel-mark">❀</span><h2>Wspólna lekcja na tablicy</h2></div><p>Wybierz tabliczkę i uruchom osiem działań do wspólnego rozwiązania z klasą. Ten tryb nie zmienia indywidualnych postępów ucznia.</p><p><a href="./tabliczka.html" class="mt-teacher-link">✿ Zobacz pełną tabliczkę mnożenia — można ją także wydrukować</a></p><div class="class-chooser"><label for="class-table">Ćwiczymy mnożenie przez</label><select id="class-table" aria-label="Wybierz tabliczkę mnożenia"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select><button id="class-start" class="btn btn-primary">Rozpocznij lekcję →</button></div></div>
       </section>
     </main>
 
